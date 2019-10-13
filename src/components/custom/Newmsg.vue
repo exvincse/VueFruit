@@ -36,18 +36,18 @@
                 </div>
                 <div v-if="active==='new'">
                   <div class="row d-lg-flex d-none">
-                      <div class="col-lg-3 d-flex flex-column text-center box mb-3" style="width:200px;"
+                      <div class="new-message-item col-lg-3 mb-3"
+                            @click.prevent="view(item.id)"
                             v-for="item in newdata" :key="item.id">
-                          <div class="pic-new mb-2">
-                          <div class="bg-cover" style="height:180px"
-                               :style="{'background-image':`url(${item.img})`}"></div>
-                          <div class="pic-bg"></div>
-                          <span href="#" class="pic-view">VIEW</span>
+                          <div class="pic mb-2">
+                            <div class="pic-animate bg-cover"
+                                style="height:180px"
+                                :style="{'background-image':`url(${item.img})`}">
+                            </div>
+                            <div class="pic-bg"></div>
+                            <span href="#" class="pic-view">VIEW</span>
                           </div>
-                          <a href="#" class="box-href"
-                            style="width:calc(100% - 30px);"
-                            @click.prevent="view(item.id)"></a>
-                          <p class="box-text mb-0 text-secondary">{{item.title}}</p>
+                          <p class="text mb-0 text-secondary">{{item.title}}</p>
                           <span>{{item.date}}</span>
                       </div>
                   </div>
@@ -55,7 +55,7 @@
                   <section class="d-flex flex-column mb-5 d-lg-none">
                       <div class="box"
                           v-for="item in newdata" :key="item.id">
-                        <a href="#" class="box-text mb-1 text-secondary"
+                        <a href="#" class="text mb-1 text-secondary"
                             @click.prevent="view(item.id)">
                         <span class="badge badge-secondary h3">重要</span>
                         <span>{{item.date}}</span>
@@ -66,24 +66,22 @@
 
                 <div v-if="active==='activity'">
                   <div class="row d-lg-flex d-none">
-                      <div class="col-lg-3 d-flex flex-column text-center box mb-3" style="width:200px;"
+                      <div class="new-message-item col-lg-3 mb-3"
+                            @click.prevent="view(item.id)"
                             v-for="item in activity" :key="item.id">
-                          <div class="pic-new mb-2">
-                          <!-- <img :src='item.img'
-                              style="height:180px"> -->
-                          <div class="bg-cover" style="height:180px"
-                               :style="{'background-image':`url(${item.img})`}"></div>
-                          <div class="pic-bg"></div>
-                          <span href="#" class="pic-view">VIEW</span>
+                          <div class="pic mb-2">
+                            <div class="pic-animate bg-cover"
+                                style="height:180px"
+                                :style="{'background-image':`url(${item.img})`}">
+                            </div>
+                            <div class="pic-bg"></div>
+                            <span href="#" class="pic-view">VIEW</span>
                           </div>
-                          <a href="#" class="box-href"
-                            style="width:calc(100% - 30px);"
-                            @click.prevent="view(item.id)"></a>
-                          <p class="box-text mb-0 text-secondary">{{item.title}}</p>
+                          <p class="text mb-0 text-secondary">{{item.title}}</p>
                           <span>{{item.date}}</span>
                       </div>
                   </div>
-                  <section class="d-flex flex-column mb-5 d-lg-none">
+                  <div class="d-flex flex-column mb-5 d-lg-none">
                       <div class="box"
                           v-for="item in activity" :key="item.id">
                         <a href="#" class="box-text mb-1 text-secondary"
@@ -92,29 +90,27 @@
                         <span>{{item.date}}</span>
                         {{item.title}}</a>
                       </div>
-                  </section>
+                  </div>
                 </div>
 
                 <div v-if="active==='exposition'">
                   <div class="row d-lg-flex d-none">
-                      <div class="col-lg-3 d-flex flex-column text-center box mb-3" style="width:200px;"
+                      <div class="new-message-item col-lg-3 mb-3"
+                            @click.prevent="view(item.id)"
                             v-for="item in exposition" :key="item.id">
-                          <div class="pic-new mb-2">
-                          <!-- <img :src='item.img'
-                              style="height:180px"> -->
-                          <div class="bg-cover" style="height:180px"
-                               :style="{'background-image':`url(${item.img})`}"></div>
-                          <div class="pic-bg"></div>
-                          <span href="#" class="pic-view">VIEW</span>
+                          <div class="pic mb-2">
+                            <div class="pic-animate bg-cover"
+                                style="height:180px"
+                                :style="{'background-image':`url(${item.img})`}">
+                            </div>
+                            <div class="pic-bg"></div>
+                            <span href="#" class="pic-view">VIEW</span>
                           </div>
-                          <a href="#" class="box-href"
-                            style="width:calc(100% - 30px);"
-                            @click.prevent="view(item.id)"></a>
-                          <p class="box-text mb-0 text-secondary">{{item.title}}</p>
+                          <p class="text mb-0 text-secondary">{{item.title}}</p>
                           <span>{{item.date}}</span>
                       </div>
                   </div>
-                  <section class="d-flex flex-column mb-5 d-lg-none">
+                  <div class="d-flex flex-column mb-5 d-lg-none">
                       <div class="box"
                           v-for="item in exposition" :key="item.id">
                         <a href="#" class="box-text mb-1 text-secondary"
@@ -123,7 +119,7 @@
                         <span>{{item.date}}</span>
                         {{item.title}}</a>
                       </div>
-                  </section>
+                  </div>
                 </div>
             </div>
         </div>

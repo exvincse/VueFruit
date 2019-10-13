@@ -38,11 +38,11 @@
             </div>
             <div class="row">
               <div class="col-lg-6 d-flex flex-column flex-lg-row mb-5">
-                <img class="pic img-fluid" :src="require('../../assets/img/newspic1.jpg')" alt="">
+                <img class="img-pic img-fluid" :src="require('../../assets/img/newspic1.jpg')" alt="">
                 <p class="p-2 mb-0">我們發現水果店中出現了休閒食品的蹤跡，那麼水果店渠道對未來休閒食品發展又怎樣的意義呢？本期針對這個問題邀請了經銷商與大家一起共同探討。</p>
               </div>
               <div class="col-lg-6 d-flex flex-column flex-lg-row">
-                <img class="pic img-fluid" :src="require('../../assets/img/newspic2.jpg')" alt="">
+                <img class="img-pic img-fluid" :src="require('../../assets/img/newspic2.jpg')" alt="">
                 <p class="p-2 mb-0">我發現如今消費者除了去商超、便利店等傳統渠道購買零食外，往往會在購買其他產品例如水果時順便購買一些零食，像乾果、休閒小食品之類的。</p>
               </div>
             </div>
@@ -55,15 +55,14 @@
           <div class="top-title mb-3">
             <h5>推薦文章</h5>
           </div>
-          <div class="d-flex flex-column text-center box mb-3"
+          <div class="box item d-flex flex-column text-center mb-3"
+                @click.prevent="view(item.id)"
                 v-for="item in hotdata" :key="item.id">
               <div class="mb-2" style="position:relative">
               <img :src='item.img'
                   width="240px"
                   height="180px">
               </div>
-              <a href="#" class="box-href"
-                @click.prevent="view(item.id)"></a>
               <p class="box-text mb-0 text-secondary">{{item.title}}</p>
           </div>
         </div>
@@ -115,3 +114,14 @@ export default {
   }
 }
 </script>
+<style lang="scss" scope="this api replaced by slot-scope in 2.5.0+">
+  .item{
+    cursor: pointer;
+  }
+  .box{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 390px;
+  }
+</style>

@@ -2,7 +2,7 @@
   <div>
     <header>
       <div class="bg-cover header-bg">
-        <div class="py-5 l-header">
+        <div class="py-5 header-content">
           <h2>不可錯過</h2>
           <p class="h5">渴望，記憶中的水果</p>
           <p class="h5">品質好的水果</p>
@@ -11,36 +11,34 @@
       </div>
     </header>
 
-    <section class="text-center mt-3">
+    <section class="hot-product mt-3">
       <h2 class="my-4">熱門商品</h2>
       <topProduct class="mb-4"></topProduct>
-      <router-link to="/products" class="btn btn-primary mb-5" style="width:120px;">
+      <router-link to="/products" class="hot-product-btn btn btn-primary mb-5">
         MORE
       </router-link>
     </section>
 
-    <section class="mt-5">
-      <div class="container text-center">
+    <section class="new-message mt-5">
+      <div class="container">
         <h2 class="mb-4">最新訊息</h2>
         <section class="animate-top d-lg-flex justify-content-around mb-5 d-none">
-          <div class="d-flex flex-column text-center box" style="width:200px;"
+          <div class="new-message-item"
+              @click.prevent="view(item.id)"
               v-for="item in newsdata" :key="item.id">
-            <div class="pic-new mb-2">
-              <!-- <img :src="item.img" alt=""> -->
-              <div class="bg-cover" style="height:200px"
+            <div class="pic mb-2">
+              <div class="pic-animate bg-cover"
                   :style="{'background-image':`url(${item.img})`}"></div>
               <div class="pic-bg"></div>
               <span href="#" class="pic-view">VIEW</span>
             </div>
-            <a href="#" class="box-href"
-              @click.prevent="view(item.id)"></a>
-            <p class="box-text mb-0 text-secondary">{{item.title}}</p>
+            <p class="text mb-0 text-secondary">{{item.title}}</p>
             <span>{{item.date}}</span>
           </div>
         </section>
 
-        <section class="d-flex flex-column mb-5 d-lg-none">
-            <div class="box text-left"
+        <section class="mobile-new-message d-flex flex-column mb-5 d-lg-none">
+            <div class="item"
               v-for="item in newsdata" :key="item.id">
               <a href="#" class="box-text mb-1 text-secondary"
                 @click.prevent="view(item.id)">
@@ -56,7 +54,7 @@
       </div>
     </section>
 
-    <section class="mt-5 p-lg-5 p-3 bg-fixed"
+    <section class="about mt-5 p-lg-5 p-3"
       :style="{'background-image': `url(${require('../../assets/img/about-bg.jpg')})`}">
       <div class="container">
         <div class="row mt-3">
@@ -70,11 +68,12 @@
       </div>
     </section>
 
-    <div class="mt-5 p-5 bg-fixed"
+    <div class="about mt-5 p-5"
       style="height: 180px;"
-      :style="{'background-image': `url(${require('../../assets/img/server-list.jpg')})`}"></div>
+      :style="{'background-image': `url(${require('../../assets/img/server-list.jpg')})`}">
+    </div>
 
-    <div class="text-center p-lg-5 p-3" style="background-color:#F1F6F9">
+    <div class="service-list p-lg-5 p-3">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-10">
@@ -90,7 +89,7 @@
       </div>
     </div>
 
-    <div class="my-5 product-pic d-lg-flex justify-content-center d-none">
+    <div class="product-pic my-5 d-lg-flex justify-content-center d-none">
       <swiper :options="Bswiper" style="height:250px">
         <swiper-slide>
           <div class="text-center py-5 bg-lwheat" style="max-height:210px">
@@ -108,7 +107,7 @@
       </swiper>
     </div>
 
-    <div class="my-5 product-pic d-flex justify-content-center d-lg-none">
+    <div class="product-pic my-5 d-flex justify-content-center d-lg-none">
       <swiper :options="RWDBswiper" style="height:250px">
         <swiper-slide>
           <div class="bg-pic text-center py-5 bg-lwheat" style="max-height:210px">

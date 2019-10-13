@@ -113,5 +113,13 @@
   .cart {
     position: relative;
   }
-
-
+  .dropdown-menu {
+    top: -330px;
+    width: 320px;
+    height: 320px;
+    right: -20px;
+    @include media-breakpoint-up(lg) {
+      width: 400px;
+      right: -10px;
+    }
+  }

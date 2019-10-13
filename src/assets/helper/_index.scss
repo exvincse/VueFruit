@@ -1,54 +1,98 @@
-.l-nev{
+// nav
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2000;
   background:linear-gradient(180deg,#3c3c3c,rgba(0,0,0,0.9));
-}
-.bg-cover {
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.l-header {
-  color: $white;
-  position: absolute;
-  top: 10%;
-  right: 5%;
-  writing-mode: vertical-rl;
-}
-.fw{
-  font-weight: bold;
-}
-.over {
-  overflow: hidden;
-}
-
-.btn:focus {
-  box-shadow: none;
-}
-
-.navbar-light .navbar-nav .l-border {
-  color: $white;
-  position: relative;
-  &::after {
-    content: "";
-    width: 0%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-bottom: 3px solid $Lorange;
-    transition: all 0.3s;
-    z-index: -1;
-  }
-
-  &:active {
-    &::after {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  .menu{
+    position: relative;
+    @media (max-width:768px) {
+      background: linear-gradient(180deg, #3c3c3c, rgba(0,0,0,0.9));
+      position: fixed;
+      max-height: 0;
+      transition: max-height .5s;
+      overflow: hidden;
+      top: 50px;
+      left: 0;
       width: 100%;
-      z-index: 100;
     }
   }
-  
-  @include media-breakpoint-up(lg) { 
-    &:hover {
+  .menu-show{
+    max-height: 300px;
+  }
+  ul{
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    @media (max-width:768px) {
+      flex-direction: column;
+      padding: 10px 20px;
+    }
+    a{
+      display: block;
+      text-decoration: none;
+      padding:10px;
+    }
+    .menu-item{
+      @media (max-width:768px) {
+        padding-bottom: 10px;
+      }
+    }
+    .menu-item + .menu-item{
+      position: relative;
+      @media (min-width:768px) {
+        margin-left: 24px;
+      }
+      ::before {
+        content: '';
+        @media (min-width:768px) {
+          position: absolute;
+          content: '/';
+          font-size: $font-size-base;
+          top: 10px;
+          color: $white;
+          left: -15px;
+        }
+      }
+    }
+    .menu-item-border {
       color: $white;
+      position: relative;
+      &::after {
+        content: "";
+        width: 0%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-bottom: 3px solid $Lorange;
+        transition: all 0.3s;
+        z-index: -1;
+      }
+      &:active,&:hover{
+        &::after {
+          width: 100%;
+          z-index: 100;
+        }
+      }
+      @media (max-width:768px) { 
+        &:hover {
+          color: $white;
+          &::after {
+            width: 100%;
+            z-index: 100;
+          }
+        }
+      }
+    }
+    .l-active {
+      color: $Lorange !important;
       &::after {
         width: 100%;
         z-index: 100;
@@ -56,62 +100,68 @@
     }
   }
 }
-
-.card-position {
+.menu-btn{
+  display: none;
+  background:transparent;
+  border: none !important;
+  outline: none !important;
+  @media (max-width:768px) {
+    height:38px;
+    display: block;
+  }
+  .fa-bars{
+    font-size: 20px;
+  }
+}
+// index
+.bg-cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.header-content {
+  color: $white;
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  writing-mode: vertical-rl;
+}
+.hot-product{
+  text-align: center;
+  .hot-product-btn{
+    width: 120px;
+  }
+}
+.new-message{
+  text-align: center;
+}
+.new-message-item{
+  cursor: pointer;
   position: relative;
-
-  .l-top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    writing-mode: vertical-lr
-  }
-  .TopMore{
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    background-color: rgba(0, 0, 0, .6);
-    transition: 0.5s;
-  }
-  &:hover{
-    .TopMore{
-      opacity: 1;
+  width: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  .pic{
+    position: relative;
+    overflow: hidden;
+    max-width: 250px;
+    border-radius: 100%;
+    border: 5px solid $Lorange;
+    .pic-animate{
+      height:200px;
+    }
+    img{
+      width: 100%;
+      height: 190px;
     }
   }
-}
-
-.l-btn {
-  border-radius: 0;
-}
-
-.navbar-light .navbar-nav .l-active {
-  color: $Lorange !important;
-
-  &::after {
-    width: 100%;
-    z-index: 100;
-  }
-}
-.animate-top{
-  transform: translateY(100px);
-  transition: ease-in-out 1.5s;
-  opacity: 0;
-}
-.animate-top-show{
-  transform: translateY(0px);
-  opacity: 1;
-}
-
-.box{
-  position: relative;
   &:hover{
-    .pic-new{
+    .pic{
       border: 5px solid $lwheat;
       transition: 0.5s;
     }
-    .box-text{
+    .text{
       color: $Lorange !important;
       transition: 0.5s;
     }
@@ -148,12 +198,7 @@
     border-radius: 50%;
     transform: translateY(50px)
   }
-  .box-href{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  .box-text{
+  .text{
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -167,19 +212,75 @@
     }
   }
 }
-.pic-new{
-  position: relative;
+.mobile-new-message{
+  text-align: left;
+  .item{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 390px;
+  }
+}
+.service-list{
+  text-align: center;
+  background-color:#F1F6F9;
+}
+.fw{
+  font-weight: bold;
+}
+.over {
   overflow: hidden;
-  max-width: 250px;
-  border-radius: 100%;
-  border: 5px solid $Lorange;
-  img{
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+
+
+.card-position {
+  position: relative;
+
+  .l-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    writing-mode: vertical-lr
+  }
+  .TopMore{
+    opacity: 0;
+    position: absolute;
     width: 100%;
-    height: 190px;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, .6);
+    transition: 0.5s;
+  }
+  &:hover{
+    .TopMore{
+      opacity: 1;
+    }
   }
 }
 
-.bg-fixed{
+.l-btn {
+  border-radius: 0;
+}
+
+
+.animate-top{
+  transform: translateY(100px);
+  transition: ease-in-out 1.5s;
+  opacity: 0;
+}
+.animate-top-show{
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+
+
+.about{
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

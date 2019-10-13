@@ -79,7 +79,7 @@
                               {{ item.product.title }}
                               <div class="text-success"
                                   v-if="item.coupon">
-                                已套用優惠券
+                                套用優惠券
                               </div>
                             </td>
                             <td class="align-middle">{{ item.qty }}{{ item.product.unit }}</td>
@@ -89,8 +89,10 @@
                         <tfoot>
                           <tr>
                             <td colspan="3"
+                                :class="{'discount':data.final_total !== data.total}"
                                 class="text-right">總計</td>
-                            <td class="text-right">{{ data.total }}</td>
+                            <td :class="{'discount':data.final_total !== data.total}"
+                                class="text-right">{{ data.total }}</td>
                           </tr>
                           <tr v-if="data.final_total !== data.total">
                             <td colspan="3"
@@ -137,7 +139,7 @@
       </div>
     </div>
         <div class="m-pos" v-if="hide">
-          <div class="d-xl-none d-block m-order px-3 py-4" style="position:relative">
+          <div class="d-xl-none d-block m-order px-2 py-4" style="position:relative">
             <div class="order-im">
                 <div class="mb-3">
                   <span class="font-title">商品名稱 :</span><br>
@@ -145,7 +147,7 @@
                     <table class="table">
                       <thead>
                         <th class="m-padding"></th>
-                        <th class="m-padding">品名</th>
+                        <th class="m-padding" width="75">品名</th>
                         <th class="m-padding">數量</th>
                         <th class="m-padding">單價</th>
                       </thead>
@@ -165,7 +167,7 @@
                             {{ item.product.title }}
                             <div class="text-success"
                                 v-if="item.coupon">
-                              已套用優惠券
+                              套用優惠券
                             </div>
                           </td>
                           <td class="align-middle m-padding">{{ item.qty }}{{ item.product.unit }}</td>
@@ -175,8 +177,10 @@
                       <tfoot>
                         <tr>
                           <td colspan="3"
+                              :class="{'discount':data.final_total !== data.total}"
                               class="text-right m-padding">總計</td>
-                          <td class="text-right m-padding">{{ data.total }}</td>
+                          <td :class="{'discount':data.final_total !== data.total}"
+                              class="text-right m-padding">{{ data.total }}</td>
                         </tr>
                         <tr v-if="data.final_total !== data.total">
                           <td colspan="3"
@@ -247,10 +251,10 @@ export default {
     timeout () {
       this.time = 3
       let timeSender = setInterval(() => {
+        this.time -= 1
         if (this.time === 0) {
           this.$router.replace(`/products`)
         }
-        this.time -= 1
       }, 1000)
       this.timeSender = timeSender
     },
@@ -282,5 +286,8 @@ export default {
 #table{
   max-height: 200px;
   overflow-y: auto;
+}
+.discount{
+  text-decoration: line-through;
 }
 </style>

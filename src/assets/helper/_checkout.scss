@@ -11,7 +11,7 @@
 	margin-left:-15px;
 	margin-right:-15px;
 	background-color: $fgray;
-	@media (max-width:768px) {
+	@media (max-width:1200px){
 		margin: 0;
 	}
     .title{
@@ -90,9 +90,12 @@
 	top: 0px;
 	transform: translateX(-100%);
 	transition: 0.7s;
+	@include iphone5(){
+		max-width: 270px;
+	}
 }
 .m-pos-show{
-	transform: translateX(-5px);
+	transform: translateX(0);
 }
 .card-outer{
 	.card-number{

@@ -31,7 +31,7 @@
     border-bottom: 1px dashed $borgray;
  }
 
- .pic{
+ .img-pic{
    @include media-breakpoint-up(lg) { 
       max-width:190px;
       max-height:190px;

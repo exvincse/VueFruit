@@ -25,7 +25,7 @@
             <div v-if="chance">
               <div class="text-center text-danger h4">你還有{{chance}}次機會</div>
               <div v-for="(item, index) in onequestion" :key="index">
-              <div class="card mx-auto" style="width: 18rem;" v-if="index === id">
+              <div class="card mx-auto" v-if="index === id">
                 <img v-if="item.img" :src="item.img" class="card-img-top" style="max-height:250px;">
                 <div class="card-body">
                   <h5 class="card-title">{{item.title}}</h5>

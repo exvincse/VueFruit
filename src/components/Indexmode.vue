@@ -1,7 +1,7 @@
 <template>
   <div>
     <navbar></navbar>
-    <div style="padding-top:50px;">
+    <div style="padding-top:54px;">
       <router-view></router-view>
       <smallcart class="smallcart" v-if='SmallCart'></smallcart>
     </div>
