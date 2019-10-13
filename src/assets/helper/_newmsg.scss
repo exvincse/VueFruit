@@ -1,0 +1,45 @@
+.breadcrumb .link-hov{
+    text-decoration:none;
+    &:hover{
+        color: $Lorange !important;
+    }
+ }
+ .msg{
+   .msgactive{
+      color:$white !important;
+      background-color: $Lorange !important;
+      &:focus{
+         color:$white !important;
+         background-color: $Lorange !important;
+      }
+   }
+   .msg-title{
+      text-decoration: none;
+      &:hover{
+          color:$white !important;
+          background-color: $Lorange !important;
+      }
+   }
+}
+ .top-title,.time{
+    border-bottom: 1px solid $borgray;
+ }
+ .time {
+    border-top: 1px solid $borgray;
+ }
+ .titleborder{
+    border-bottom: 1px dashed $borgray;
+ }
+
+ .pic{
+   @include media-breakpoint-up(lg) { 
+      max-width:190px;
+      max-height:190px;
+   }
+ }
+ .service-pic{
+   @include media-breakpoint-up(lg) { 
+      width:260px;
+      height:165px
+   }
+ }

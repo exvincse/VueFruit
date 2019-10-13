@@ -1,0 +1,38 @@
+.nav-fixed {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9999;
+  }
+  
+  .l-nav-item + .l-nav-item{
+    position: relative;
+    ::before {
+      content: '';
+      @include media-breakpoint-up(lg) {
+        position: absolute;
+        content: '/';
+        font-size: $font-size-base;
+        top: 7px;
+        color: $white;
+        left: -12px;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    top: -330px;
+    width: 320px;
+    height: 320px;
+    right: -20px;
+    @include media-breakpoint-up(lg) {
+      width: 400px;
+      right: -10px;
+    }
+  }
+  
+  .navbar-expand-lg .navbar-collapse {
+    @include media-breakpoint-up(lg) {
+      display: none !important
+    }
+  }

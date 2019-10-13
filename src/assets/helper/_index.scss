@@ -1,0 +1,203 @@
+.l-nev{
+  background:linear-gradient(180deg,#3c3c3c,rgba(0,0,0,0.9));
+}
+.bg-cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.l-header {
+  color: $white;
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  writing-mode: vertical-rl;
+}
+.fw{
+  font-weight: bold;
+}
+.over {
+  overflow: hidden;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.navbar-light .navbar-nav .l-border {
+  color: $white;
+  position: relative;
+  &::after {
+    content: "";
+    width: 0%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 3px solid $Lorange;
+    transition: all 0.3s;
+    z-index: -1;
+  }
+
+  &:active {
+    &::after {
+      width: 100%;
+      z-index: 100;
+    }
+  }
+  
+  @include media-breakpoint-up(lg) { 
+    &:hover {
+      color: $white;
+      &::after {
+        width: 100%;
+        z-index: 100;
+      }
+    }
+  }
+}
+
+.card-position {
+  position: relative;
+
+  .l-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    writing-mode: vertical-lr
+  }
+  .TopMore{
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0, 0, 0, .6);
+    transition: 0.5s;
+  }
+  &:hover{
+    .TopMore{
+      opacity: 1;
+    }
+  }
+}
+
+.l-btn {
+  border-radius: 0;
+}
+
+.navbar-light .navbar-nav .l-active {
+  color: $Lorange !important;
+
+  &::after {
+    width: 100%;
+    z-index: 100;
+  }
+}
+.animate-top{
+  transform: translateY(100px);
+  transition: ease-in-out 1.5s;
+  opacity: 0;
+}
+.animate-top-show{
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.box{
+  position: relative;
+  &:hover{
+    .pic-new{
+      border: 5px solid $lwheat;
+      transition: 0.5s;
+    }
+    .box-text{
+      color: $Lorange !important;
+      transition: 0.5s;
+    }
+    .pic-bg{
+      transition: 0.5s;
+      position:absolute;
+      width: 100%;
+      border-radius: 100%;
+      height: 100%;
+      top: 0;
+      opacity: 0.7;
+      background-color: rgb(168, 162, 162);
+    }
+    .pic-view{
+      opacity: 1;
+      transition: 0.5s;
+      transform: translateY(0px)
+    }
+  }
+  .pic-view{
+    opacity: 0;
+    color: #fff;
+    line-height: 50px;
+    padding: 0.5rem;
+    position:absolute;
+    border: 2px solid #fff;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    transform: translateY(50px)
+  }
+  .box-href{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .box-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    @include pad(){
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+      white-space: nowrap;
+    }
+  }
+}
+.pic-new{
+  position: relative;
+  overflow: hidden;
+  max-width: 250px;
+  border-radius: 100%;
+  border: 5px solid $Lorange;
+  img{
+    width: 100%;
+    height: 190px;
+  }
+}
+
+.bg-fixed{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  @include media-breakpoint-up(lg) {
+    background-attachment: fixed;
+  }
+}
+.product-pic{
+  .pic-title{
+    background-color: $Lorange;
+    border-radius: 100px;
+    margin: 0 auto;
+    color: $white;
+    padding: 20px;
+    width: 110px;
+  }
+  .bg-pic{
+    width: 100%;
+    height: 100%;
+  }
+}
