@@ -53,7 +53,7 @@
                     </div>
                 </div>
 
-                <section class="mobile-message mb-5 d-lg-none">
+                <div class="mobile-message mb-5 d-lg-none">
                     <div class="mobile-message-item"
                         v-for="item in newdata" :key="item.id">
                       <a href="#" class="text mb-1 text-secondary"
@@ -62,7 +62,7 @@
                       <span>{{item.date}}</span>
                       {{item.title}}</a>
                     </div>
-                </section>
+                </div>
               </div>
 
               <div v-if="active==='activity'">
@@ -82,10 +82,10 @@
                         <span>{{item.date}}</span>
                     </div>
                 </div>
-                <div class="d-flex flex-column mb-5 d-lg-none">
-                    <div class="box"
+                <div class="mobile-message mb-5 d-lg-none">
+                    <div class="mobile-message-item"
                         v-for="item in activity" :key="item.id">
-                      <a href="#" class="box-text mb-1 text-secondary"
+                      <a href="#" class="text mb-1 text-secondary"
                           @click.prevent="view(item.id)">
                       <span class="badge badge-secondary h3">重要</span>
                       <span>{{item.date}}</span>
@@ -111,10 +111,10 @@
                         <span>{{item.date}}</span>
                     </div>
                 </div>
-                <div class="d-flex flex-column mb-5 d-lg-none">
-                    <div class="box"
+                <div class="mobile-message mb-5 d-lg-none">
+                    <div class="mobile-message-item"
                         v-for="item in exposition" :key="item.id">
-                      <a href="#" class="box-text mb-1 text-secondary"
+                      <a href="#" class="text mb-1 text-secondary"
                           @click.prevent="view(item.id)">
                       <span class="badge badge-secondary h3">重要</span>
                       <span>{{item.date}}</span>
