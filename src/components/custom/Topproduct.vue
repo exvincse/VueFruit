@@ -37,7 +37,7 @@
                       </div>
                     </div>
                     <button
-                       class="btn btn-lwheat btn-lg l-btn"
+                       class="btn btn-w-color1 btn-lg l-btn"
                        @click="addtoCart(item.product.id)"
                        :disabled="loading===item.product.id">
                       <span class="h4 font-weight-bold text-tea">
@@ -86,7 +86,7 @@
                       </div>
                     </div>
                     <button
-                       class="btn btn-lwheat btn-lg l-btn"
+                       class="btn btn-w-color1 btn-lg l-btn"
                        @click="addtoCart(item.product.id)"
                        :disabled="loading===item.product.id">
                       <span class="h4 font-weight-bold text-tea">
@@ -142,14 +142,16 @@ export default {
     }
   },
   created () {
+    // created時呼叫ajax把data資料準備好
     this.get()
     this.getProducts()
   },
   computed: {
+    // 取得vuex計算資料
     ...mapGetters('Mcart', ['loading'])
   },
   methods: {
-    //  取得訂單資料
+    // 取得訂單資料
     get () {
       this.orders = []
       this.$store.dispatch('updateLoading', true)
@@ -190,18 +192,11 @@ export default {
         this.product = this.$store.state.Mproduct.product
       })
     },
+    // 排序所有資料銷售數
     sort () {
-      //  熱銷商品篩選
       let order = []
       let popular = []
       this.total_sort = []
-      //  取得所有訂單銷售數qty
-      // this.ary.forEach((item) => {
-      //   let key = Object.keys(item.products)
-      //   key.forEach((orderid) => {
-      //     order.push(item.products[orderid])
-      //   })
-      // })
       this.ary.forEach((item) => {
         let val = Object.values(item.products)
         val.forEach((item) => {
@@ -215,7 +210,7 @@ export default {
           product: item,
           total_num: 0
         })
-        //  每個產品銷售數
+
         order.forEach((item) => {
           if (title.indexOf(item.product.title) !== -1) {
             popular[num].total_num += item.qty
@@ -230,9 +225,11 @@ export default {
         this.total_sort.push(popular[i])
       }
     },
+    // 加入購物車
     addtoCart (id, qty = 1) {
       this.$store.dispatch('Mcart/addtocart', { id, qty })
     },
+    // 前往特定商品
     gotoproduct (id) {
       this.$router.push(`/products/${id}`)
     }

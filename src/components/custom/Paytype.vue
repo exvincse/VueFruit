@@ -39,7 +39,7 @@
       <div class="d-flex justify-content-between">
         <router-link class="btn btn-secondary"
             to="/products">返回商店</router-link>
-        <a href="#" class="btn btn-lwheat"
+        <a href="#" class="btn btn-w-color1"
           @click.prevent="payinformation()">下一步</a>
       </div>
     </div>
@@ -54,6 +54,7 @@ export default {
     }
   },
   methods: {
+    // 選擇繳款方式
     payinformation () {
       this.$router.replace({
         path: `/checkout/${this.$route.params.id}/payinformation`,

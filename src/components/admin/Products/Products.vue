@@ -87,14 +87,17 @@ export default {
     }
   },
   created () {
+    // created時呼叫ajax把data資料準備好
     this.getProducts()
   },
   methods: {
+    // 呼叫Vuex modules getProducts方法，並使用promise等待當前ajax結束後才取得資料
     getProducts () {
       this.$store.dispatch('Mproduct/getProducts').then(() => {
         this.products = this.$store.state.Mproduct.product.slice()
       })
     },
+    // 開啟新增修改modal
     openModal (isNew, item) {
       if (isNew) {
         this.tempproduct = {}
@@ -105,6 +108,7 @@ export default {
       }
       $('#productModal').modal('show')
     },
+    // 接收新增或修改modal子元件資料並發送ajax
     updateproduct () {
       this.$store.dispatch('updateLoading', true)
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`
@@ -128,10 +132,12 @@ export default {
         this.$store.dispatch('updateLoading', false)
       })
     },
+    // 開啟刪除modal
     delModal (item) {
       this.tempproduct = Object.assign({}, item)
       $('#delProductModal').modal('show')
     },
+    // 接收刪除modal子元件資料並發送ajax
     delData () {
       this.$store.dispatch('updateLoading', true)
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${this.tempproduct.id}`
@@ -150,6 +156,7 @@ export default {
         this.$store.dispatch('updateLoading', false)
       })
     },
+    // 接收Pages子元件資料，來切換當頁資料
     getPageData (get) {
       this.PageData = get
     }

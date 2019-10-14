@@ -22,9 +22,11 @@ export default {
     }
   },
   mounted () {
+    // mounted時，呼叫chart.js套件裡面的方法
     this.renderChart(this.chartData, this.options)
   },
   watch: {
+    // 監聽父元件近來資料發生變化執行方法
     flag () {
       this.renderChart(this.chartData, this.options)
     },

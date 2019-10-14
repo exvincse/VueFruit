@@ -39,6 +39,7 @@ export default {
     }
   },
   watch: {
+    // 監聽年份，並顯示符合年份的月份
     getyear () {
       let NowYear = new Date().getFullYear()
       let NowMonth = new Date().getMonth() + 1
@@ -50,6 +51,7 @@ export default {
     }
   },
   computed: {
+    // 顯示現在年份-5年為區間
     selectYear () {
       let ary = []
       let NowYear = new Date().getFullYear()
@@ -59,21 +61,13 @@ export default {
       }
       return ary
     }
-    // selectMonth () {
-    //   let NowYear = new Date().getFullYear()
-    //   let NowMonth = new Date().getMonth() + 1
-    //   if (this.getyear === NowYear) {
-    //     this.month = NowMonth
-    //   } else {
-    //     this.month = 12
-    //   }
-    //   return this.month
-    // }
   },
   methods: {
+    // 改變年份或月份時呼叫父層元件方法並傳遞資料
     changeMonth () {
       this.$emit('changeMonth', this.getyear, this.getmonth)
     },
+    // 清空年月份
     clear () {
       this.getmonth = ''
       this.getyear = ''

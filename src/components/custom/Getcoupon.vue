@@ -49,7 +49,7 @@
               <div class="h5 text-center" v-else-if="qcount===2">您答對2題，獲得50%折扣，優惠碼222</div>
               <div class="h5 text-center" v-else-if="qcount===3">您答對3題，獲得90%折扣，優惠碼111</div>
               <router-link to="/products"
-                class="btn btn-outline-Lorange mt-2">去購物</router-link>
+                class="btn btn-outline-primary mt-2">去購物</router-link>
             </div>
           </div>
 
@@ -98,6 +98,7 @@ export default {
     }
   },
   methods: {
+    // ajax獲取firebase資料
     getjson () {
       // proxyTable跨域代理
       // this.$store.dispatch('updateLoading', true)
@@ -114,6 +115,7 @@ export default {
         this.$store.dispatch('updateLoading', false)
       })
     },
+    // 隨機抽3題
     getquest () {
       let ary = []
       for (let i = 0; i <= 2; i++) {
@@ -140,6 +142,7 @@ export default {
       // }
       // this.onequestion = ary
     },
+    // 驗證是否答對
     sub () {
       this.$store.dispatch('updateLoading', true)
       if (this.onequestion[this.id].ans === this.check) {
@@ -169,6 +172,7 @@ export default {
         this.corss = false
       }
     },
+    // 前往下一題
     nextq () {
       this.ans = ''
       this.coustomans = ''
@@ -177,6 +181,7 @@ export default {
       if (this.id > 2) return false
       this.id += 1
     },
+    // 點選開始鈕
     start () {
       this.getjson()
       this.star = true

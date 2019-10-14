@@ -71,7 +71,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        border-bottom: 3px solid $Lorange;
+        border-bottom: 3px solid $primary;
         transition: all 0.3s;
         z-index: -1;
       }
@@ -92,7 +92,7 @@
       }
     }
     .l-active {
-      color: $Lorange !important;
+      color: $primary !important;
       &::after {
         width: 100%;
         z-index: 100;
@@ -147,7 +147,7 @@
     overflow: hidden;
     max-width: 250px;
     border-radius: 100%;
-    border: 5px solid $Lorange;
+    border: 5px solid $primary;
     .pic-animate{
       height:200px;
     }
@@ -158,11 +158,11 @@
   }
   &:hover{
     .pic{
-      border: 5px solid $lwheat;
+      border: 5px solid $w-color1;
       transition: 0.5s;
     }
     .text{
-      color: $Lorange !important;
+      color: $primary !important;
       transition: 0.5s;
     }
     .pic-bg{
@@ -269,7 +269,7 @@
 }
 .product-pic{
   .pic-title{
-    background-color: $Lorange;
+    background-color: $primary;
     border-radius: 100px;
     margin: 0 auto;
     color: $white;

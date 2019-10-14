@@ -1,7 +1,7 @@
 .cart-footer{
     height: 180px;
     width: 100%;
-    background-color: $lwheat;
+    background-color: $w-color1;
     position: absolute;
     z-index: -1;
     bottom: 0;
@@ -10,7 +10,7 @@
 	border-radius: 10px 0 0 10px;
 	margin-left:-15px;
 	margin-right:-15px;
-	background-color: $fgray;
+	background-color: $color5;
 	@media (max-width:1200px){
 		margin: 0;
 	}
@@ -19,7 +19,7 @@
     }
 }
 .m-order{
-	background-color: $fgray;
+	background-color: $color5;
 }
 .font-title,.font-msg{
     letter-spacing: 1.67px;
@@ -42,7 +42,7 @@
 		transform: translateX(-50%);
 		z-index: -10;
 		width: 55%;
-        border-bottom: 17px solid $lwheat;
+        border-bottom: 17px solid $w-color1;
     }
 }
 .pay{
@@ -61,7 +61,7 @@
 	color:black !important;
 }
 .pay-click{
-	background-color:$Lorange;
+	background-color:$primary;
 	color:$white !important;
 }
 .m-order{
@@ -69,7 +69,7 @@
 	.order-btn{
 		position: absolute;
 		writing-mode: vertical-rl;
-		background-color: $fgray;
+		background-color: $color5;
 		height: 96px;
 		text-align: center;
     line-height: 56px;
@@ -126,7 +126,7 @@
 }
 
 .card-color{
-	color:$card;
+	color:$color6;
 }
 
 .note{
@@ -142,7 +142,7 @@
 }
 
 .success-bg{
-	background-color: $lwheat;
+	background-color: $w-color1;
 	border-radius: 150px;
 	width: 146px;
 	height: 146px;
@@ -155,7 +155,7 @@
     width: 120px;
     .box{
       position: relative;
-      background-color: $card;
+      background-color: $color6;
       border-radius: 50px;
       width: 50px;
       height: 50px;
@@ -170,21 +170,21 @@
         height: 2px;
         top: 50%;
         left: 50px; 
-        background-color:$borgray;
+        background-color:$color4;
       }
     }
     .box-conduct{
       color:$white;
-      background-color: $Lorange;
+      background-color: $primary;
       &::after{
-        background:linear-gradient(90deg,$Lorange,$card);
+        background:linear-gradient(90deg,$primary,$color6);
       }
     }
     .box-success{
       color:$white;
-      background-color: $Lorange;
+      background-color: $primary;
       &::after{
-        background:$Lorange;
+        background:$primary;
       }
     }
     &:last-child .box::after{

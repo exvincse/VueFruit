@@ -53,17 +53,18 @@ export default {
     }
   },
   watch: {
+    // 監聽父元件傳進來資料發成變化時，執行Datadefault方法
     ary: {
       handler: 'Datadefault',
       immediate: true
     }
   },
   computed: {
+    // 計算總頁數
     TotalPage () {
-      // this.TotalLength = this.ary.length
       return Math.ceil(this.ary.length / this.limit)
     },
-    //  limitPage,顯示分頁限制為5頁
+    // limitPage,顯示分頁限制為5頁
     limitPage () {
       let PageRange = []
       let totalpage = Math.ceil(this.ary.length / this.limit)
@@ -87,12 +88,13 @@ export default {
     }
   },
   methods: {
+    // 呼叫時，計算總頁數、總共資料
     Datadefault () {
       this.TotalLength = this.ary.length
       this.totalpage = Math.ceil(this.ary.length / this.limit)
       this.sortdata()
     },
-    //  當前頁資料
+    // 當前頁資料
     pagedata (page) {
       this.PageData = []
       if (this.sortary.length === 0) {
@@ -111,7 +113,7 @@ export default {
       }
       this.$emit('getPageData', this.PageData)
     },
-    //  點選分頁至頂或移動到特定地方
+    // 點選分頁至頂或移動到特定地方
     scroolpage (page) {
       this.pagedata(page)
       if (this.makeout === 'product') {
@@ -127,13 +129,10 @@ export default {
         }, 500, 'swing')
       }
     },
-
+    // 排序資料由大到小
     sortdata () {
       //  判斷當前是優惠卷還是訂單或者是商品頁
       this.sortary = Array.prototype.slice.call(this.ary)
-      // this.ary.forEach((item) => {
-      //   this.sortary.push(item)
-      // })
       this.sortary.sort((a, b) => {
         if (this.makeout === 'pay') {
           return b.is_paid - a.is_paid

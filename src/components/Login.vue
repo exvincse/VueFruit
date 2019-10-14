@@ -57,6 +57,7 @@ export default {
     }
   },
   methods: {
+    // 驗證登入
     signin () {
       this.$validator.validate().then((valid) => {
         if (valid) {

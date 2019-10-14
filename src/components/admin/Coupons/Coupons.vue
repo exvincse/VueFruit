@@ -97,10 +97,11 @@ export default {
     }
   },
   created () {
+    // created時呼叫ajax把data資料準備好
     this.getcoupons()
   },
   methods: {
-    //  ajax獲取資料
+    // ajax獲取資料
     getcoupons () {
       this.$store.dispatch('updateLoading', true)
       this.getCoupon = []
@@ -133,7 +134,7 @@ export default {
         )
       })
     },
-
+    // 開啟新增修改modal
     openCouponModal (get, item) {
       if (get === true) {
         this.tempCoupon = {}
@@ -144,7 +145,7 @@ export default {
       }
       $('#couponModal').modal('show')
     },
-
+    // 接收新增或修改modal子元件資料並發送ajax
     updateCoupons (duedate) {
       this.$validator.validate().then((valid) => {
         if (valid) {
@@ -178,12 +179,12 @@ export default {
         }
       })
     },
-
+    // 開啟刪除modal
     DelCouponModal (item) {
       this.tempCoupon = Object.assign({}, item)
       $('#delCouponModal').modal('show')
     },
-
+    // 接收刪除modal子元件資料並發送ajax
     DeleteData (id) {
       this.$store.dispatch('updateLoading', true)
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${id}`
@@ -202,10 +203,9 @@ export default {
         this.$store.dispatch('updateLoading', false)
       })
     },
-    //  NavDate元件呼叫方法
+    // 接收NavDate子元件資料，並篩選當前年月資料
     changeMonth (year, month) {
       let CopyAry = Array.prototype.slice.call(this.getCoupon)
-      //  timestemp 轉為 yyyy/mm/dd
       let DateAry = CopyAry.map((item) => {
         let date = new Date(item.due_date)
         let year = date.getFullYear()
@@ -236,7 +236,7 @@ export default {
       })
       this.ary = FilterAry
     },
-    //  NavSelect元件呼叫方法
+    // 接收NavSelect子元件資料，並以輸入關鍵字來篩選當前資料
     select (selectname) {
       this.ary = []
       if (selectname === '') {
@@ -251,7 +251,7 @@ export default {
         this.ary = filterary
       }
     },
-    //  pages元件呼叫方法
+    // 接收Pages子元件資料，來切換當頁資料
     getPageData (getdata) {
       this.pagedata = getdata
     }

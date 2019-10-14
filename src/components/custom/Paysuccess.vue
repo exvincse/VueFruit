@@ -7,7 +7,7 @@
         <i class="far fa-thumbs-up fa-5x" style="line-height:130px"></i>
       </div>
       <div class="mb-4">稍後將寄送訂單詳細資訊至您的E-mail</div>
-      <a href="#" class="btn btn-Lorange"
+      <a href="#" class="btn btn-primary"
         @click.prevent="index()">返回首頁</a>
     </div>
 
@@ -24,7 +24,7 @@
       </div>
       <div class="mb-4">* 請至您選擇之超商店內機台輸入代碼進行繳費，逾期訂單自動作廢。</div>
       <div class="text-right">
-        <a href="#" class="btn btn-Lorange"
+        <a href="#" class="btn btn-primary"
           @click.prevent="index()">返回首頁</a>
       </div>
     </div>
@@ -34,6 +34,7 @@
 <script>
 export default {
   methods: {
+    // 回主頁
     index () {
       this.$router.replace(`/index`)
     }

@@ -68,12 +68,15 @@ export default {
     }
   },
   computed: {
+    // 取得vuex計算資料
     ...mapGetters('Mcart', ['data', 'isdisabled'])
   },
   created () {
+    // ajax獲取資料
     this.getCart()
   },
   methods: {
+    // 呼叫Vuex modules Mcart/getCart方法，並使用promise等待當前ajax結束後才取得資料
     ...mapActions('Mcart', ['getCart']),
     removeCart (id) {
       this.$store.dispatch('Mcart/removeCart', id).then(() => {

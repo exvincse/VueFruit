@@ -59,21 +59,26 @@ export default {
     }
   },
   created () {
+    // ajax獲取資料
     this.CartShow()
   },
   watch: {
-    '$route': function (to, from) {
+    // 監聽路由並呼叫vuex Mcart/getCart方法
+    '$route' () {
       this.CartShow()
       this.$store.dispatch('Mcart/getCart')
     }
   },
   mounted () {
+    // mounted hook資料畫面render好後註冊原生事件
     window.addEventListener('scroll', this.scroll)
   },
   beforeDestroy () {
+    // beforeDestroy hook銷毀原生事件
     window.removeEventListener('scroll', this.scroll)
   },
   methods: {
+    // 原生scroll事件購物車
     scroll () {
       let scrollPos = $(window).scrollTop()
       let windowHeight = $(window).height()
@@ -86,6 +91,7 @@ export default {
         $('.smallcart').css('bottom', '10px')
       }
     },
+    // 監聽路由隱藏購物車
     CartShow () {
       if (this.$route.path === '/cart') {
         this.SmallCart = false

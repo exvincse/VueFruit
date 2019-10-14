@@ -13,7 +13,7 @@
   .product-category{
     text-align: center;
     .category-active{
-      box-shadow: 0px 0px 15px $Lorange; 
+      box-shadow: 0px 0px 15px $primary; 
     }
     a{
       color: $white;
@@ -147,7 +147,7 @@
   }
   .btn .number {
     position: absolute;
-    background: $Lorange;
+    background: $primary;
     color: $white;
     border-radius: 20px;
     padding: 5px 12px;

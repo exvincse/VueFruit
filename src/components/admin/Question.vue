@@ -109,6 +109,7 @@ export default {
     }
   },
   methods: {
+    // 上傳題目圖片，並且可以預覽
     uploadfile () {
       this.$store.dispatch('updateLoading', true)
       const file = this.$refs.file.files[0]
@@ -134,6 +135,7 @@ export default {
         })
       })
     },
+    // 驗證題目欄位是否都正確
     submitpage () {
       this.$store.dispatch('updateLoading', true)
       this.$validator.validate().then((valid) => {

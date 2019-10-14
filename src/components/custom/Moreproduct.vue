@@ -75,13 +75,16 @@ export default {
     }
   },
   computed: {
+    // 接收vuex計算的資料，product icon loading
     ...mapGetters('Mcart', ['loading'])
   },
   created () {
+    // ajax獲取資料，並獲取route params
     this.ProductId = this.$route.params.id
     this.getProduct()
   },
   methods: {
+    // ajax獲取單一商品資料
     getProduct () {
       this.$store.dispatch('updateLoading', true)
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${this.ProductId}`
@@ -95,6 +98,7 @@ export default {
         this.$store.dispatch('updateLoading', false)
       })
     },
+    // 加入購物車
     addCart (id, qty = 1) {
       this.$store.dispatch('Mcart/addtocart', { id, qty })
     }

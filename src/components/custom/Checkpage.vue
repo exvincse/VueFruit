@@ -84,6 +84,7 @@ export default {
     }
   },
   methods: {
+    // 提交並驗證資料
     submitPage () {
       this.$store.dispatch('updateLoading', true)
       this.$store.dispatch('Mcart/getCart').then(() => {

@@ -23,9 +23,11 @@ export default {
     }
   },
   watch: {
+    // 監聽輸入文字，並執行select方法
     selectname: 'select'
   },
   methods: {
+    // 呼叫時執行父元件方法並傳遞資料
     select () {
       this.$emit('select', this.selectname)
     }

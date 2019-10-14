@@ -10,6 +10,7 @@ export default {
     isdisable: '',
     hide: true
   },
+  // 接收外部呼叫vuex方法
   actions: {
     getCart (context) {
       context.commit('HIDE', true)
@@ -68,6 +69,7 @@ export default {
       })
     }
   },
+  // 接收actions資料並賦值state，或做計算
   mutations: {
     GETCART (state, payload) {
       state.data = payload
@@ -82,6 +84,7 @@ export default {
       state.hide = payload
     }
   },
+  // 回傳state資料給呼叫的原件computed
   getters: {
     data (state) {
       return state.data

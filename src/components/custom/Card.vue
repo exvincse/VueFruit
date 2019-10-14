@@ -12,7 +12,7 @@
             <i class="fas fa-times"></i>
           </button>
       <div class="input-group-append">
-        <button class="btn btn-outline-Lorange"
+        <button class="btn btn-outline-primary"
                 @click="search()">搜尋</button>
       </div>
     </div>
@@ -53,7 +53,7 @@
                        v-if="!item.origin_price">售價 {{item.price}} 元</div>
                   <del class="h6 text-secondary"
                        v-if="item.origin_price">原價 {{item.origin_price}} 元</del>
-                  <div class="h5 text-Lorange"
+                  <div class="h5 text-primary"
                        v-if="item.origin_price">特價 {{item.price}} 元</div>
                 </div>
               </div>
@@ -65,7 +65,7 @@
                   查看更多
                 </button>
                 <button type="button"
-                        class="btn btn-Lorange ml-auto ml-md-0 addbtn"
+                        class="btn btn-primary ml-auto ml-md-0 addbtn"
                         @click="addtoCart(item.id)"
                         :disabled="loading===item.id">
                   <i class="fas fa-spinner fa-spin"
@@ -111,9 +111,11 @@ export default {
     }
   },
   created () {
+    // created時呼叫ajax把data資料準備好
     this.getProducts()
   },
   watch: {
+    // 點選分頁至頂或移動到特定地方
     active () {
       this.datafilter()
       let target = $('.scroll-top')
@@ -124,11 +126,12 @@ export default {
       }, 500, 'swing')
     }
   },
+  // 接收vuex計算的資料
   computed: {
     ...mapGetters('Mcart', ['loading'])
   },
   methods: {
-    //  全部商品
+    // 呼叫vuex modules Mproduct/getProducts方法，並使用promise等待當前ajax結束後才取得資料
     getProducts () {
       this.$store.dispatch('Mproduct/getProducts').then(() => {
         this.products = this.$store.state.Mproduct.product.slice()
@@ -136,6 +139,7 @@ export default {
         this.datafilter()
       })
     },
+    // 呼叫時render分類
     datafilter () {
       this.ary = []
       this.searchname = ''
@@ -160,18 +164,18 @@ export default {
         }
       })
     },
-    //  新增至購物車
+    // 新增至購物車
     addtoCart (id, qty = 1) {
       this.$store.dispatch('Mcart/addtocart', { id, qty })
     },
-
+    // 接收Pages子元件資料，來切換當頁資料
     getPageData (PageData) {
       this.pageproduct = PageData
     },
-
+    // 輸入關鍵字來篩選當前資料
     search () {
       if (this.searchname === '') {
-        return
+        return false
       }
       this.claer = true
       this.searchshow = true
@@ -179,6 +183,7 @@ export default {
         return item.title.indexOf(this.searchname) !== -1
       })
     },
+    // 清空搜尋欄位，並已全部資料顯示
     ClearSearch () {
       this.ary = []
       this.claer = false
@@ -194,6 +199,7 @@ export default {
         })
       }
     },
+    // 點選商品查看更多
     gotoproduct (id) {
       // this.$router.push({
       //   name: 'productsid',

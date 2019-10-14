@@ -7,7 +7,7 @@
            @click="showmenu()">
            <i class="fas fa-bars"></i>
          </button>
-         <a href="#" class="btn btn-Lorange"
+         <a href="#" class="btn btn-primary"
             @click.prevent="loginout()">登出</a>
       </div>
     </nav>
@@ -18,6 +18,7 @@
 import $ from 'jquery'
 export default {
   methods: {
+    // 登出後台
     loginout () {
       this.$store.dispatch('updateLoading', true)
       const api = `${process.env.VUE_APP_APIPATH}/logout`
@@ -28,6 +29,7 @@ export default {
         this.$store.dispatch('updateLoading', false)
       })
     },
+    // 裝置寬度小於某個斷點時左上方顯示按鈕，SideBar則隱藏
     showmenu () {
       $('.sidemenu').toggleClass('sideshow')
       $('.slide-bg').toggleClass('d-block')

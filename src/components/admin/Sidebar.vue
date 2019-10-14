@@ -75,6 +75,7 @@ export default {
     }
   },
   methods: {
+    // 裝置寬度小於某個斷點時左上方顯示按鈕，SideBar則隱藏
     hide () {
       $('.sidemenu').removeClass('sideshow')
       $('.slide-bg').removeClass('d-block')

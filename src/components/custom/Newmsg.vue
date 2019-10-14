@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-lightgray">
+    <div class="bg-color3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <router-link class="item-link"
@@ -137,6 +137,7 @@ export default {
     }
   },
   computed: {
+    // 切換不同選項篩選資料
     newdata () {
       return this.data.filter((item) => {
         return item.category === 'new'
@@ -154,15 +155,18 @@ export default {
     }
   },
   created () {
+    // ajax獲取資料
     this.getdata()
   },
   methods: {
+    // ajax呼叫github上的json
     getdata () {
       const api = '/jsondata/newmsg.json'
       this.$http.get(api).then((response) => {
         this.data = response.data.data
       })
     },
+    // 呼叫vuex傳遞資料
     view (id) {
       this.$store.dispatch('view', id)
     }

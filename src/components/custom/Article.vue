@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-lightgray">
+    <div class="bg-color3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <router-link class="item-link"
@@ -83,15 +83,18 @@ export default {
       data: {}
     }
   },
+  // created時呼叫ajax把data資料準備好
   created () {
     this.getdata()
   },
   watch: {
+  // 監聽路由，發生變化執行方法
     '$route' () {
       this.getdata()
     }
   },
   methods: {
+    // ajax呼叫github上的json
     getdata () {
       this.hotdata = []
       const api = '/jsondata/newmsg.json'
@@ -105,6 +108,7 @@ export default {
         this.random(data, this.data)
       })
     },
+    // 亂數隨機抽取文章
     random (data, remove) {
       data.splice(remove.id - 1, 1)
       for (let i = 0; i <= 4; i++) {
@@ -112,6 +116,7 @@ export default {
         this.hotdata.push(data.splice(item, 1)[0])
       }
     },
+    // 呼叫vuex傳遞資料
     view (id) {
       this.$store.dispatch('view', id)
     }

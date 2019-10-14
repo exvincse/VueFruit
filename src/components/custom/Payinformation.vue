@@ -46,11 +46,11 @@
               </div>
               <div class="d-none d-lg-block">
                 <i class="card-color fab fa-cc-visa fa-2x mx-2"
-                :class="{'text-Lorange':active === 'visa'}"></i>
+                :class="{'text-primary':active === 'visa'}"></i>
                 <i class="card-color fab fa-cc-mastercard fa-2x mr-2"
-                  :class="{'text-Lorange':active === 'mastercard'}"></i>
+                  :class="{'text-primary':active === 'mastercard'}"></i>
                 <i class="card-color fab fa-cc-jcb fa-2x"
-                  :class="{'text-Lorange':active === 'jcb'}"></i>
+                  :class="{'text-primary':active === 'jcb'}"></i>
               </div>
             </div>
             <span class="text-danger"
@@ -106,7 +106,7 @@
               <label class="custom-control-label cursor" for="check">
                 請再次確認「訂單資訊」與「付款資訊」，付款完成後將發送通知信至您的 E-mail 信箱
               </label>
-              <div class="text-card">第三方支付金流平台服務條款</div>
+              <div class="text-color6">第三方支付金流平台服務條款</div>
                <span class="text-danger"
                   v-if="errors.has('check')">請勾選並同意</span>
             </div>
@@ -114,7 +114,7 @@
           <div class="form-group d-flex justify-content-between">
             <a href="#" class="btn btn-secondary"
               @click.prevent="back()">回上一步</a>
-            <button class="btn btn-Lorange">確認付款</button>
+            <button class="btn btn-primary">確認付款</button>
           </div>
         </form>
       </div>
@@ -155,7 +155,7 @@
               <label class="custom-control-label cursor" for="check">
                 請再次確認「訂單資訊」與「付款資訊」，付款完成後將發送通知信至您的 E-mail 信箱
               </label>
-              <div class="text-card">第三方支付金流平台服務條款</div>
+              <div class="text-color6">第三方支付金流平台服務條款</div>
                <span class="text-danger"
                   v-if="errors.has('check')">請勾選並同意</span>
             </div>
@@ -164,7 +164,7 @@
           <div class="form-group d-flex justify-content-between">
             <a href="#" class="btn btn-secondary"
               @click.prevent="back()">回上一步</a>
-            <button class="btn btn-Lorange">確認付款</button>
+            <button class="btn btn-primary">確認付款</button>
           </div>
         </form>
       </div>
@@ -215,7 +215,7 @@
               <label class="custom-control-label cursor" for="check">
                 請再次確認「訂單資訊」與「付款資訊」，付款完成後將發送通知信至您的 E-mail 信箱
               </label>
-              <div class="text-card">第三方支付金流平台服務條款</div>
+              <div class="text-color6">第三方支付金流平台服務條款</div>
                 <span class="text-danger"
                 v-if="errors.has('check')">請勾選並同意</span>
             </div>
@@ -224,7 +224,7 @@
           <div class="form-group d-flex justify-content-between">
             <a href="#" class="btn btn-secondary"
               @click.prevent="back()">回上一步</a>
-            <button class="btn btn-Lorange">確認付款</button>
+            <button class="btn btn-primary">確認付款</button>
           </div>
         </form>
       </div>
@@ -246,15 +246,18 @@ export default {
     }
   },
   watch: {
+    // 監聽信用卡後3碼
     card () {
       this.cardkind()
     }
   },
   created () {
+    // 獲取route params，並取得當期年份
     this.category = this.$route.query.choose
     this.date = new Date().getFullYear()
   },
   methods: {
+    // 篩選後三碼開頭第一碼決定是哪家信用卡
     cardkind () {
       let cardfirst = String(this.card).split('')
       if (cardfirst.length === 0) this.active = ''
@@ -262,9 +265,11 @@ export default {
       if (cardfirst[0] === '6' && cardfirst[1] === '2') this.active = 'mastercard'
       if (cardfirst[0] === '3') this.active = 'jcb'
     },
+    // 回去上一步
     back () {
       this.$router.push(`/checkout/${this.$route.params.id}/paytype`)
     },
+    // 驗證輸入欄位
     submitpage () {
       this.$validator.validate().then((valid) => {
         if (valid) {

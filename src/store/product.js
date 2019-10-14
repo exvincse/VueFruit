@@ -5,6 +5,7 @@ export default {
   state: {
     product: []
   },
+  // 接收外部呼叫vuex方法
   actions: {
     getProducts (context) {
       context.commit('LOADING', true, { root: true })
@@ -23,6 +24,7 @@ export default {
       })
     }
   },
+  // 接收actions資料並賦值state，或做計算
   mutations: {
     PRODUCT (state, payload) {
       state.product = payload

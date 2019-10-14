@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="bg-lightgray">
+    <div class="bg-color3">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <router-link class="text-lgray link-hov"
+          <router-link class="text-color2 link-hov"
              to="/index">首頁</router-link>
         </li>
         <li class="breadcrumb-item">
-          <router-link class="text-lgray link-hov"
+          <router-link class="text-color2 link-hov"
              to="/newmsg/service">服務項目</router-link>
         </li>
       </ol>

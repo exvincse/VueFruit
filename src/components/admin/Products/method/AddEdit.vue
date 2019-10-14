@@ -189,11 +189,13 @@
 export default {
   props: ['tempproduct', 'status'],
   watch: {
+    // 開啟修改，新增資料的modal時清除裡面資料
     tempproduct () {
       this.errors.clear()
     }
   },
   methods: {
+    // 新增或修改商品資料
     uploadFile () {
       const img = this.$refs.files.files[0]
       const formData = new FormData()
@@ -216,6 +218,7 @@ export default {
         }
       })
     },
+    // 通過驗證時觸發父層元件方法並傳遞資料
     updateproduct () {
       this.$validator.validate().then((valid) => {
         if (valid) {

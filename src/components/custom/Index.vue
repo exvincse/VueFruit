@@ -78,11 +78,11 @@
         <div class="row justify-content-center">
           <div class="col-lg-10">
             <h3>服務項目</h3>
-            <p class="mb-3 text-lgray text-lg-center text-left">
+            <p class="mb-3 text-color2 text-lg-center text-left">
               伏入特擁有自己的綠色海洋，邀請您來體驗種植的樂趣．遠離都市的紛擾，給自己假日一天休閒之旅。
               不但能放鬆，還能帶精美的體驗水果禮品回家．體驗完還能坐在古色古香的休憩區，挑望一片綠油油的美景，聞聞水果茶，
               喝一杯能讓自己即使回到忙碌的城市工作，只要下午Tea time時，總能想起的放鬆好茶。</p>
-            <router-link class="btn btn-Lorange"
+            <router-link class="btn btn-primary"
                   to="/newmsg/service">MORE</router-link>
           </div>
         </div>
@@ -92,7 +92,7 @@
     <div class="product-pic my-5 d-lg-flex justify-content-center d-none">
       <swiper :options="Bswiper" style="height:250px">
         <swiper-slide>
-          <div class="text-center py-5 bg-lwheat" style="max-height:210px">
+          <div class="text-center py-5 bg-w-color1" style="max-height:210px">
             <div class="pic-title">
               <span class="h2">產品相簿</span>
             </div>
@@ -110,7 +110,7 @@
     <div class="product-pic my-5 d-flex justify-content-center d-lg-none">
       <swiper :options="RWDBswiper" style="height:250px">
         <swiper-slide>
-          <div class="bg-pic text-center py-5 bg-lwheat" style="max-height:210px">
+          <div class="bg-pic text-center py-5 bg-w-color1" style="max-height:210px">
             <div class="pic-title">
               <span class="h2">產品相簿</span>
             </div>
@@ -136,6 +136,7 @@ export default {
     topProduct
   },
   created () {
+    // ajax獲取資料
     this.productpic()
     this.getdata()
   },
@@ -165,18 +166,21 @@ export default {
     }
   },
   mounted () {
+    // mounted hook資料畫面render好後註冊原生事件
     window.addEventListener('scroll', this.scroll)
   },
   beforeDestroy () {
+    // beforeDestroy hook銷毀原生事件
     window.removeEventListener('scroll', this.scroll)
   },
-
   methods: {
+    // 呼叫Vuex modules Mproduct/getProducts方法，並使用promise等待當前ajax結束後才取得資料
     productpic () {
       this.$store.dispatch('Mproduct/getProducts').then(() => {
         this.data = this.$store.state.Mproduct.product
       })
     },
+    // 原生scroll事件向下滑顯示動畫效果
     scroll () {
       if (this.top) {
         window.removeEventListener('scroll', this.scroll)
@@ -194,6 +198,7 @@ export default {
         })
       }
     },
+    // ajax呼叫github上的json
     getdata () {
       const api = '/jsondata/newmsg.json'
       this.$http.get(api).then((response) => {
@@ -203,6 +208,7 @@ export default {
         }
       })
     },
+    // 呼叫vuex傳遞資料
     view (id) {
       this.$store.dispatch('view', id)
     }

@@ -43,6 +43,7 @@ export default {
   props: ['tempproduct'],
   methods: {
     DeleteData () {
+      // 刪除資料時觸發父層元件方法並傳遞資料
       this.$emit('delData')
     }
   }

@@ -1,16 +1,16 @@
 
  .now-article{
-    border-bottom: 1px dashed $borgray;
+    border-bottom: 1px dashed $color4;
     .now-article-title{
       text-align: center;
-      border-bottom: 1px dashed $borgray;
+      border-bottom: 1px dashed $color4;
     }
     .now-article-time {
-      border-bottom: 1px solid $borgray;
-      border-top: 1px solid $borgray;
+      border-bottom: 1px solid $color4;
+      border-top: 1px solid $color4;
     }
     .now-article-content{
-      border-bottom: 1px dashed $borgray;
+      border-bottom: 1px dashed $color4;
     }
  }
  .hot-article{

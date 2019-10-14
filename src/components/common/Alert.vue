@@ -39,11 +39,12 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'Navbar',
   computed: {
+    // 接收vuex計算資料
     ...mapGetters(['messages'])
   },
   methods: {
+    // 刪除時呼叫vuex方法並傳遞資料
     removeMessage (num) {
       this.$store.dispatch('removeMessage', num)
     }

@@ -45,14 +45,13 @@ $green:   #28a745 !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
 //---------------------------------
-$black:#000000!default;
-$Lorange:	#ff8040 !default;
-$lwheat:#ffeedd !default;
-$lgray:#666 !default;
-$lightgray:#eeeeee !default;
-$borgray:#CCCCCC !default;
-$fgray:#F3F3F3 !default;
-$card:#CACACA !default;
+$l-orange:	#ff8040 !default;
+$w-color1:  #ffeedd !default;
+$color2:    #666 !default;
+$color3:    #eeeeee !default;
+$color4:#CCCCCC !default;
+$color5:#F3F3F3 !default;
+$color6:#CACACA !default;
 //---------------------------------
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -72,18 +71,17 @@ $colors: map-merge(
     "gray":       $gray-600,
     "gray-dark":  $gray-800,
     //----------------------
-    "Lorange":$Lorange,
-    "lwheat":$lwheat,
-    "lgray":$lgray,
-    "lightgray":$lightgray,
-    "borgray":$borgray,
-    "fgray":$fgray,
-    "card":$card
+    "w-color1":   $w-color1,
+    "color2":     $color2,
+    "color3":     $color3,
+    "color4":$color4,
+    "color5":$color5,
+    "color6":$color6
   ),
   $colors
 );
 
-$primary:       $Lorange !default;
+$primary:       $l-orange !default;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
 $info:          $cyan !default;
@@ -92,14 +90,12 @@ $danger:        $red !default;
 $light:         $gray-100 !default;
 $dark:          $gray-800 !default;
 //---------------------------
-$white:$white;
-$Lorange:$Lorange;
-$lwheat:$lwheat;
-$lgray:$lgray;
-$lightgray:$lightgray;
-$borgray:$borgray;
-$fgray:$fgray;
-$card:$card;
+$w-color1: $w-color1;
+$color2:$color2;
+$color3:$color3;
+$color4:$color4;
+$color5:$color5;
+$color6:$color6;
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
@@ -112,14 +108,12 @@ $theme-colors: map-merge(
     "danger":     $danger,
     "light":      $light,
     "dark":       $dark,
-    "Lorange":$Lorange,
-    "lwheat":$lwheat,
-    "white":$white,
-    "lgray":$lgray,
-    "lightgray":$lightgray,
-    "borgray":$borgray,
-    "fgray":$fgray,
-    "card":$card
+    "w-color1": $w-color1,
+    "color2":$color2,
+    "color3":$color3,
+    "color4":$color4,
+    "color5":$color5,
+    "color6":$color6
   ),
   $theme-colors
 );

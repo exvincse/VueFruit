@@ -83,9 +83,11 @@ export default {
     pages
   },
   created () {
+    // created時呼叫ajax把data資料準備好
     this.get()
   },
   methods: {
+    // ajax獲取資料
     get (page = 1) {
       this.orders = []
       this.$store.dispatch('updateLoading', true)
@@ -117,7 +119,7 @@ export default {
         }
       })
     },
-    //  NavDate元件呼叫方法
+    // 接收NavDate子元件資料，並篩選當前年月資料
     changeMonth (year, month) {
       let CopyAry = Array.prototype.slice.call(this.orders)
       let DateAry = CopyAry.map((item) => {
@@ -148,7 +150,7 @@ export default {
       })
       this.ary = FilterAry
     },
-    //  NavSelect元件呼叫方法
+    // 接收NavSelect子元件資料，並以輸入關鍵字來篩選當前資料
     select (selectname) {
       this.ary = []
       if (selectname === '') {
@@ -163,7 +165,7 @@ export default {
         this.ary = FilterAry
       }
     },
-    //  pages元件呼叫方法
+    // 接收Pages子元件資料，來切換當頁資料
     getPageData (getdata) {
       this.pagedata = getdata
     }

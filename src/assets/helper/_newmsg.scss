@@ -1,36 +1,36 @@
 // newmsg
 .breadcrumb .item-link{
     text-decoration:none;
-    color: $lgray;
+    color: $color2;
     &:hover{
-        color: $Lorange !important;
+        color: $primary !important;
     }
  }
  .new-msg-list{
    .new-msg-title{
      color: $white;
-     background-color: $Lorange;
+     background-color: $primary;
    }
     .new-msg-item{
       text-decoration: none;
-      background-color: $lightgray;
+      background-color: $color3;
       color: $black;
       &:hover{
           color: $white;
-          background-color: $Lorange;
+          background-color: $primary;
       }
     }
    .msgactive{
       color:$white !important;
-      background-color: $Lorange !important;
+      background-color: $primary !important;
       &:focus{
          color:$white !important;
-         background-color: $Lorange !important;
+         background-color: $primary !important;
       }
    }
 }
  .all-msg-title{
-    border-bottom: 1px solid $borgray;
+    border-bottom: 1px solid $color4;
  }
  .mobile-message{
     display: flex;

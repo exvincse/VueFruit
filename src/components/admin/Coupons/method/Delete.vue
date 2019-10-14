@@ -42,6 +42,7 @@
 export default {
   props: ['tempCoupon'],
   methods: {
+    // 刪除資料時觸發父層元件方法並傳遞資料
     DeleteData (id) {
       this.$emit('DeleteData', id)
     }

@@ -109,7 +109,7 @@
                               placeholder="請輸入優惠碼"
                               v-model.trim="coupons">
                         <div class="input-group-append">
-                          <button class="btn btn-outline-Lorange"
+                          <button class="btn btn-outline-primary"
                                   type="button"
                                   @click="UseCoupons()">
                             套用優惠碼
@@ -197,7 +197,7 @@
                       placeholder="請輸入優惠碼"
                       v-model="coupons">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-Lorange"
+                  <button class="btn btn-outline-primary"
                           type="button"
                           @click="UseCoupons()">
                     套用優惠碼
@@ -232,25 +232,31 @@ export default {
     }
   },
   watch: {
+    // 監聽購物車都無商品時，3秒跳回商品頁
     hide () {
       this.timeout()
     }
   },
   created () {
+    // ajax獲取資料
     this.getCart()
   },
   beforeDestroy () {
+    // beforeDestroy hook銷毀setInterval
     clearInterval(this.timeSender)
   },
   computed: {
+    // 取得vuex計算資料
     ...mapGetters('Mcart', ['data', 'isdisabled'])
   },
   methods: {
+    // 呼叫Vuex modules Mcart/getCart方法，並使用promise等待當前ajax結束後才取得資料
     getCart () {
       this.$store.dispatch('Mcart/getCart').then(() => {
         this.hide = this.$store.state.Mcart.hide
       })
     },
+    // 計時3秒
     timeout () {
       this.time = 3
       let timeSender = setInterval(() => {
@@ -261,11 +267,13 @@ export default {
       }, 1000)
       this.timeSender = timeSender
     },
+    // 呼叫Vuex modules Mcart/removeCart方法，並使用promise等待當前ajax結束後才取得資料
     removeCart (id) {
       this.$store.dispatch('Mcart/removeCart', id).then(() => {
         this.getCart()
       })
     },
+    // 使用優惠卷
     UseCoupons () {
       if (this.coupons === '') {
         this.couponsath = true
@@ -289,6 +297,7 @@ export default {
         this.$store.dispatch('updateLoading', false)
       })
     },
+    // 裝置寬度小於某個斷點時左上方顯示按鈕，購物車則隱藏
     ordershow () {
       $('.m-pos').toggleClass('m-pos-show')
     }

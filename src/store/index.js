@@ -13,6 +13,7 @@ export default new Vuex.Store({
     isdisabled: false,
     message: []
   },
+  // 接收外部呼叫vuex方法
   actions: {
     updateLoading (context, payload) {
       context.commit('LOADING', payload)
@@ -42,6 +43,7 @@ export default new Vuex.Store({
       })
     }
   },
+  // 接收actions資料並賦值state，或做計算
   mutations: {
     LOADING (state, payload) {
       state.isLoading = payload
@@ -67,6 +69,7 @@ export default new Vuex.Store({
       state.message.splice(num, 1)
     }
   },
+  // 回傳state資料給呼叫的原件computed
   getters: {
     messages (state) {
       return state.message
@@ -75,6 +78,7 @@ export default new Vuex.Store({
       return state.isLoading
     }
   },
+  // import模組
   modules: {
     Mproduct,
     Mcart

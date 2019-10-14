@@ -128,11 +128,13 @@ export default {
     }
   },
   watch: {
+    // 開啟修改，新增資料的modal時清除裡面資料
     tempCoupon () {
       this.errors.clear()
     }
   },
   methods: {
+    // 通過驗證時觸發父層元件方法並傳遞資料
     updateCoupons () {
       this.$validator.validate().then((valid) => {
         if (valid) {

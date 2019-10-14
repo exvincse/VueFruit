@@ -134,9 +134,11 @@ export default {
     card
   },
   created () {
+    // ajax獲取資料
     this.products()
   },
   methods: {
+    // 呼叫Vuex modules Mproduct/getProducts方法，並使用promise等待當前ajax結束後才取得資料
     products () {
       this.$store.dispatch('Mproduct/getProducts').then(() => {
         this.product = this.$store.state.Mproduct.product

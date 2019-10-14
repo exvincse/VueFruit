@@ -116,6 +116,7 @@ export default {
     }
   },
   computed: {
+    // 顯示現在年份-5年為區間
     selectYear () {
       let ary = []
       let NowYear = new Date().getFullYear()
@@ -126,10 +127,12 @@ export default {
     }
   },
   created () {
+    // created時呼叫ajax把data資料準備好
     this.get()
     this.getProducts()
   },
   watch: {
+    // 監聽年份，年份選擇時才可選擇月份
     check () {
       if (this.check === true) {
         this.choosemonth = ''
@@ -138,11 +141,13 @@ export default {
     }
   },
   methods: {
+    // 呼叫Vuex modules/getProducts方法，並使用promise等待當前ajax結束後才取得資料
     getProducts () {
       this.$store.dispatch('Mproduct/getProducts').then(() => {
         this.product = this.$store.state.Mproduct.product
       })
     },
+    // 取得當前時間
     getdate (date) {
       return {
         year: date.getFullYear(),
@@ -150,6 +155,7 @@ export default {
         date: date.getDate()
       }
     },
+    // 取得ajax資料
     get () {
       this.loaded = false
       this.orders = []
@@ -185,6 +191,7 @@ export default {
         }
       })
     },
+    // 年月份改變時，篩選符合的資料
     checkdate (total = false) {
       this.monthmoney = 0
       this.ary = []
@@ -208,6 +215,7 @@ export default {
       }, 0)
       this.sort()
     },
+    // 排序所有資料銷售數
     sort () {
       let order = []
       let popular = []
@@ -226,7 +234,6 @@ export default {
           product: item.title,
           total_num: 0
         })
-        //  每個產品銷售數
         order.forEach((item) => {
           if (title.indexOf(item.product.title) !== -1) {
             popular[num].total_num += item.qty

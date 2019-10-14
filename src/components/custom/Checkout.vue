@@ -118,11 +118,13 @@ export default {
     }
   },
   created () {
+    // created時呼叫ajax把data資料準備好，並取得路由params
     this.orderid = this.$route.params.id
     this.get()
   },
   watch: {
-    '$route': function () {
+    // 監聽路由並改變當前購物進度
+    '$route' () {
       if (this.$route.path === `/checkout/${this.orderid}/paysuccess`) {
         this.orderimfor = false
         this.check = true
@@ -133,6 +135,7 @@ export default {
     }
   },
   methods: {
+    // ajax獲取資料
     get () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order/${this.orderid}`
       this.$http.get(api).then((response) => {
@@ -140,17 +143,7 @@ export default {
         this.products = Object.values(this.order.products)
       })
     },
-    // payOrder () {
-    //   this.$store.dispatch('updateLoading', true)
-    //   const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/pay/${this.orderid}`
-    //   this.$http.post(api).then((response) => {
-    //     if (response.data.success) {
-    //       this.check = true
-    //       this.get()
-    //     }
-    //     this.$store.dispatch('updateLoading', false)
-    //   })
-    // },
+    // 裝置寬度小於某個斷點時左上方顯示按鈕，購物車則隱藏
     ordershow () {
       $('.m-pos').toggleClass('m-pos-show')
     }
