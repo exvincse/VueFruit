@@ -7,17 +7,19 @@
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
                   <div class="card mb-5">
-                    <div class="card-position">
-                      <div class="bg-cover"
-                           style="height: 220px;"
-                           :style="{backgroundImage:`url(${item.product.imageUrl})`}">
+                    <div class="product-item">
+                      <div class="product-item-img"
+                          :style="{backgroundImage:`url(${item.product.imageUrl})`}"
+                          style="height:220px">
+                        <span class="hot-product-icon"></span>
+                        <span class="hot-product-title">HOT</span>
+                        <div class="d-none d-md-block">
+                          <a href="#" class="product-item-link"
+                            @click.prevent="gotoproduct(item.product.id)">
+                              <span class="product-more">更多資訊</span>
+                          </a>
+                        </div>
                       </div>
-                      <span class="bg-primary text-white p-2 l-top">暢銷商品</span>
-                        <a href="#" class="TopMore d-flex align-items-center justify-content-center"
-                          style="text-decoration: none"
-                          @click.prevent="gotoproduct(item.product.id)">
-                            <span class="product-more">更多資訊</span>
-                        </a>
                     </div>
                     <div class="d-flex text-center">
                       <div class="col-7">
@@ -52,33 +54,34 @@
         <div class="d-lg-none d-block">
           <swiper :options="RWDswiperOption">
             <swiper-slide v-for="item in total_sort"
-                   :key="item.product.id" style="width: 300px; margin-right: 30px;">
+                   :key="item.product.id" style="width: 350px; margin-right: 30px;">
                   <div class="card mb-5">
-                    <div class="card-position">
-                      <div class="bg-cover"
-                           style="height: 220px;"
-                           :style="{backgroundImage:`url(${item.product.imageUrl})`}">
+                    <div class="product-item">
+                      <div class="product-item-img"
+                          :style="{backgroundImage:`url(${item.product.imageUrl})`}"
+                          style="height:220px">
+                        <span class="hot-product-icon"></span>
+                        <span class="hot-product-title">HOT</span>
+                        <div class="d-none d-md-block">
+                          <a href="#" class="product-item-link"
+                            @click.prevent="gotoproduct(item.product.id)">
+                              <span class="product-more">更多資訊</span>
+                          </a>
+                        </div>
                       </div>
-                      <span class="bg-primary text-white p-2 l-top">暢銷商品</span>
-                        <a href="#" class="TopMore d-flex align-items-center justify-content-center"
-                          style="text-decoration: none"
-                          @click.prevent="gotoproduct(item.product.id)">
-                            <span class="product-more">更多資訊</span>
-                        </a>
                     </div>
                     <div class="d-flex text-center">
-                      <div class="col-6">
-                        <div class="py-3">
+                      <div class="col-7">
+                        <div class="border-right py-3 text-tea">
                           <strong class="h5">{{item.product.title}}</strong>
                         </div>
                       </div>
-                      <div class="border-left"></div>
-                      <div class="col-6">
-                        <div class="py-3">
-                          <strong class="h5"
-                                  v-if="!item.product.origin_price">{{item.product.price}} 元</strong>
+                      <div class="col-5">
+                        <div class="py-3 text-tea">
                           <strong class="h6"
-                                  v-if="item.product.origin_price">{{item.product.origin_price}} 元</strong>
+                                  v-if="item.product.origin_price">{{item.product.price}} 元</strong>
+                          <strong class="h6"
+                                  v-else>{{item.product.origin_price}} 元</strong>
                         </div>
                       </div>
                     </div>

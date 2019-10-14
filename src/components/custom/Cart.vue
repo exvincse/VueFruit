@@ -47,13 +47,14 @@
             </div>
           </div>
         </section>
+
         <div class="row justify-content-center">
           <div class="col-lg-11">
             <div class="row justify-content-center">
               <div class="col-lg-4 d-xl-block d-none" v-if="hide">
                 <div class="order-im p-4">
                   <h5 class="title">商品資訊</h5>
-                  <div class="mb-3">
+                  <div>
                     <span class="font-title">已選購商品 :</span><br>
                     <div id="table">
                       <table class="table">
@@ -102,11 +103,11 @@
                         </tfoot>
                     </table>
                     </div>
-                    <div class="input-group mb-3 input-group-sm">
+                    <div class="input-group input-group-sm">
                         <input type="text"
                               class="form-control p-2"
                               placeholder="請輸入優惠碼"
-                              v-model="coupons">
+                              v-model.trim="coupons">
                         <div class="input-group-append">
                           <button class="btn btn-outline-Lorange"
                                   type="button"
@@ -116,6 +117,7 @@
                         </div>
                     </div>
                   </div>
+                  <div v-if="couponsath" class="text-danger mb-3">優惠碼輸入錯誤</div>
                 </div>
               </div>
               <div class="col-lg-8 p-lg-5 pay">
@@ -126,9 +128,8 @@
         </div>
       </div>
 
-      <div class="text-center h3 d-flex align-items-center justify-content-center"
-           style="height:500px;"
-           v-else>
+      <div v-else class="text-center h3 d-flex align-items-center justify-content-center"
+           style="height:500px;" >
         <div class="d-flex align-items-center flex-column">
           <span>沒有選購任何商品{{time}}秒後跳回商品頁...</span>
           <span>
@@ -138,77 +139,78 @@
         </div>
       </div>
     </div>
-        <div class="m-pos" v-if="hide">
-          <div class="d-xl-none d-block m-order px-2 py-4" style="position:relative">
-            <div class="order-im">
-                <div class="mb-3">
-                  <span class="font-title">商品名稱 :</span><br>
-                  <div id="table">
-                    <table class="table">
-                      <thead>
-                        <th class="m-padding"></th>
-                        <th class="m-padding" width="75">品名</th>
-                        <th class="m-padding">數量</th>
-                        <th class="m-padding">單價</th>
-                      </thead>
-                      <tbody>
-                        <tr v-for="item in data.carts"
-                            :key="item.id">
-                          <td class="align-middle m-padding">
-                            <button type="button"
-                                    class="btn btn-outline-danger btn-sm"
-                                    @click="removeCart(item.id)"
-                                    :disabled="isdisabled === item.id">
-                              <i class="far fa-trash-alt"></i>
-                            </button>
-                          </td>
+    <div class="m-pos" v-if="hide">
+      <div class="d-xl-none d-block m-order px-2 py-4" style="position:relative">
+        <div class="order-im">
+            <div>
+              <span class="font-title">商品名稱 :</span><br>
+              <div id="table">
+                <table class="table">
+                  <thead>
+                    <th class="m-padding"></th>
+                    <th class="m-padding" width="75">品名</th>
+                    <th class="m-padding">數量</th>
+                    <th class="m-padding">單價</th>
+                  </thead>
+                  <tbody>
+                    <tr v-for="item in data.carts"
+                        :key="item.id">
+                      <td class="align-middle m-padding">
+                        <button type="button"
+                                class="btn btn-outline-danger btn-sm"
+                                @click="removeCart(item.id)"
+                                :disabled="isdisabled === item.id">
+                          <i class="far fa-trash-alt"></i>
+                        </button>
+                      </td>
 
-                          <td class="align-middle m-padding">
-                            {{ item.product.title }}
-                            <div class="text-success"
-                                v-if="item.coupon">
-                              套用優惠券
-                            </div>
-                          </td>
-                          <td class="align-middle m-padding">{{ item.qty }}{{ item.product.unit }}</td>
-                          <td class="align-middle m-padding text-right">{{ item.final_total }}</td>
-                        </tr>
-                      </tbody>
-                      <tfoot>
-                        <tr>
-                          <td colspan="3"
-                              :class="{'discount':data.final_total !== data.total}"
-                              class="text-right m-padding">總計</td>
-                          <td :class="{'discount':data.final_total !== data.total}"
-                              class="text-right m-padding">{{ data.total }}</td>
-                        </tr>
-                        <tr v-if="data.final_total !== data.total">
-                          <td colspan="3"
-                              class="text-right text-success">折扣價</td>
-                          <td class="text-right text-success">{{ data.final_total }}</td>
-                        </tr>
-                      </tfoot>
-                    </table>
-                  </div>
-                  <div class="input-group mb-3 input-group-sm">
-                    <input type="text"
-                          class="form-control p-2"
-                          placeholder="請輸入優惠碼"
-                          v-model="coupons">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-Lorange"
-                              type="button"
-                              @click="UseCoupons()">
-                        套用優惠碼
-                      </button>
-                    </div>
-                  </div>
+                      <td class="align-middle m-padding">
+                        {{ item.product.title }}
+                        <div class="text-success"
+                            v-if="item.coupon">
+                          套用優惠券
+                        </div>
+                      </td>
+                      <td class="align-middle m-padding">{{ item.qty }}{{ item.product.unit }}</td>
+                      <td class="align-middle m-padding text-right">{{ item.final_total }}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="3"
+                          :class="{'discount':data.final_total !== data.total}"
+                          class="text-right m-padding">總計</td>
+                      <td :class="{'discount':data.final_total !== data.total}"
+                          class="text-right m-padding">{{ data.total }}</td>
+                    </tr>
+                    <tr v-if="data.final_total !== data.total">
+                      <td colspan="3"
+                          class="text-right text-success">折扣價</td>
+                      <td class="text-right text-success">{{ data.final_total }}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <div class="input-group mb-3 input-group-sm">
+                <input type="text"
+                      class="form-control p-2"
+                      placeholder="請輸入優惠碼"
+                      v-model="coupons">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-Lorange"
+                          type="button"
+                          @click="UseCoupons()">
+                    套用優惠碼
+                  </button>
                 </div>
+              </div>
+              <span v-if="couponsath" class="text-danger">優惠碼輸入錯誤</span>
             </div>
-            <a href="#" class="order-btn"
-              @click.prevent="ordershow()">商品資訊</a>
-          </div>
         </div>
+        <a href="#" class="order-btn"
+          @click.prevent="ordershow()">商品資訊</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -225,6 +227,7 @@ export default {
       coupons: '',
       timeSender: null,
       hide: true,
+      couponsath: false,
       time: 3
     }
   },
@@ -264,6 +267,10 @@ export default {
       })
     },
     UseCoupons () {
+      if (this.coupons === '') {
+        this.couponsath = true
+        return false
+      }
       this.$store.dispatch('updateLoading', true)
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
       let data = {
@@ -272,6 +279,12 @@ export default {
         }
       }
       this.$http.post(api, data).then((response) => {
+        if (!response.data.success) {
+          this.couponsath = true
+          this.$store.dispatch('updateLoading', false)
+          return false
+        }
+        this.couponsath = false
         this.getCart()
         this.$store.dispatch('updateLoading', false)
       })

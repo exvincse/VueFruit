@@ -63,7 +63,16 @@
     padding-top: 48px;
   }
 }
-
+.side-list{
+  list-style: none;
+  padding: 0;
+  .nav-link{
+    i{
+      font-size: 20px;
+      width: 25px;
+    }
+  }
+}
 .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;
@@ -132,7 +141,6 @@
   }
 }
 .chart{
-  // flex: 0 0 100%;
   width: 100%;
   #bar-chart{
     @include pad() {

@@ -1,0 +1,45 @@
+
+ .now-article{
+    border-bottom: 1px dashed $borgray;
+    .now-article-title{
+      text-align: center;
+      border-bottom: 1px dashed $borgray;
+    }
+    .now-article-time {
+      border-bottom: 1px solid $borgray;
+      border-top: 1px solid $borgray;
+    }
+    .now-article-content{
+      border-bottom: 1px dashed $borgray;
+    }
+ }
+ .hot-article{
+  .hot-article-item{
+    display: flex;
+    flex-direction: column;
+    max-width: 390px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .item-text{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    color: $secondary;
+  }
+ }
+ 
+ .now-article-content-img{
+   @include media-breakpoint-up(lg) { 
+      max-width:190px;
+      max-height:190px;
+   }
+ }
+
+ .service-pic{
+   @include media-breakpoint-up(lg) { 
+      width:260px;
+      height:165px
+   }
+ }

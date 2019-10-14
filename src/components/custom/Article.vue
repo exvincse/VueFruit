@@ -1,13 +1,13 @@
 <template>
   <div>
-        <div class="bg-lightgray">
+    <div class="bg-lightgray">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <router-link class="text-lgray link-hov"
+                <router-link class="item-link"
                     to="/index">首頁</router-link>
             </li>
             <li class="breadcrumb-item">
-                <router-link class="text-lgray link-hov"
+                <router-link class="item-link"
                     to="/newmsg">最新消息</router-link>
             </li>
             <li class="breadcrumb-item">
@@ -20,29 +20,31 @@
             </li>
         </ol>
     </div>
+
     <div class="container mt-5">
       <div class="row">
         <div class="col-lg-9">
-          <div class="mb-4 titleborder">
-            <div class="top-title titleborder">
+          <div class="now-article mb-4">
+            <div class="now-article-title">
               <h4 v-if="data.category === 'new'">最新訊息</h4>
               <h4 v-else-if="data.category === 'activity'">活動消息</h4>
               <h4 v-else-if="data.category === 'exposition'">展覽資訊</h4>
             </div>
             <h2 class="mt-5 text-center">{{data.title}}</h2>
-            <div class="text-center my-4">
-              <span class="time p-1">{{data.date}}</span>
+            <div class="my-4 text-center">
+              <span class="now-article-time p-1">{{data.date}}</span>
             </div>
-            <div class="mb-5 titleborder">
+            <div class="mb-5 now-article-content">
               <p>{{data.content}}</p>
             </div>
+
             <div class="row">
               <div class="col-lg-6 d-flex flex-column flex-lg-row mb-5">
-                <img class="img-pic img-fluid" :src="require('../../assets/img/newspic1.jpg')" alt="">
+                <img class="now-article-content-img img-fluid" :src="require('../../assets/img/newspic1.jpg')" alt="">
                 <p class="p-2 mb-0">我們發現水果店中出現了休閒食品的蹤跡，那麼水果店渠道對未來休閒食品發展又怎樣的意義呢？本期針對這個問題邀請了經銷商與大家一起共同探討。</p>
               </div>
               <div class="col-lg-6 d-flex flex-column flex-lg-row">
-                <img class="img-pic img-fluid" :src="require('../../assets/img/newspic2.jpg')" alt="">
+                <img class="now-article-content-img img-fluid" :src="require('../../assets/img/newspic2.jpg')" alt="">
                 <p class="p-2 mb-0">我發現如今消費者除了去商超、便利店等傳統渠道購買零食外，往往會在購買其他產品例如水果時順便購買一些零食，像乾果、休閒小食品之類的。</p>
               </div>
             </div>
@@ -51,19 +53,21 @@
             <p>{{data.content}}</p>
           </div>
         </div>
+
         <div class="col-lg-3 mb-5 d-lg-block d-none">
-          <div class="top-title mb-3">
-            <h5>推薦文章</h5>
-          </div>
-          <div class="box item d-flex flex-column text-center mb-3"
-                @click.prevent="view(item.id)"
-                v-for="item in hotdata" :key="item.id">
-              <div class="mb-2" style="position:relative">
-              <img :src='item.img'
-                  width="240px"
-                  height="180px">
-              </div>
-              <p class="box-text mb-0 text-secondary">{{item.title}}</p>
+          <div class="hot-article">
+            <h5 class="hot-article-title mb-3">熱門文章</h5>
+            <div class="hot-article-item mb-3"
+                  @click.prevent="view(item.id)"
+                  v-for="item in hotdata" :key="item.id"
+                  :title="item.title">
+                <div class="mb-2">
+                  <img :src='item.img'
+                      width="255px"
+                      height="180px">
+                </div>
+                <p class="item-text mb-0">{{item.title}}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -114,14 +118,3 @@ export default {
   }
 }
 </script>
-<style lang="scss" scope="this api replaced by slot-scope in 2.5.0+">
-  .item{
-    cursor: pointer;
-  }
-  .box{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 390px;
-  }
-</style>

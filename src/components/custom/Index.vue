@@ -37,7 +37,7 @@
           </div>
         </section>
 
-        <section class="mobile-new-message d-flex flex-column mb-5 d-lg-none">
+        <section class="mobile-new-message mb-5 d-lg-none">
             <div class="item"
               v-for="item in newsdata" :key="item.id">
               <a href="#" class="box-text mb-1 text-secondary"

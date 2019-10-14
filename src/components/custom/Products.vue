@@ -1,5 +1,5 @@
 <template>
-  <div class="products-bg">
+  <div>
     <div class="bd-example">
       <div id="carouselExampleCaptions"
            class="carousel slide"
@@ -61,37 +61,37 @@
       </div>
     </div>
 
-    <section class="mt-5 l-scrool">
-      <div class="container">
-        <div class="category d-md-block d-none mb-5 text-center">
+    <section class="mt-5 ">
+      <div class="container scroll-top">
+        <div class="product-category d-md-block d-none mb-5">
               <a href="#"
-                 class="text-white"
                  :class="{'category-active':active==='all'}"
                  @click.prevent="active='all'">
                 <div class="bg-cover"
-                style="background-image:url('https://images.unsplash.com/photo-1467540826941-623d5627c80b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
+                  style="background-image:url('https://images.unsplash.com/photo-1467540826941-623d5627c80b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
                 </div>
-                <span class="h4">所有商品</span></a>
+                <span class="h4">所有商品</span>
+              </a>
               <a href="#"
                  v-for="item in categories" :key="item"
-                 class="text-white ml-2 mb-2"
+                 class="ml-2 mb-2"
                  :class="{'category-active':active===item}"
                  @click.prevent="active=item"
                  >
                 <div class="bg-cover"
-                v-if="item==='水果'"
-                style="background-image:url('https://images.unsplash.com/photo-1560968591-1d39044e5110?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
+                  v-if="item==='水果'"
+                  style="background-image:url('https://images.unsplash.com/photo-1560968591-1d39044e5110?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
                 </div>
                 <div class="bg-cover"
-                v-else-if="item==='飲料'"
-                style="background-image:url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
+                  v-else-if="item==='飲料'"
+                  style="background-image:url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
                 </div>
-                <span class="h4">{{item}}</span></a>
+                <span class="h4">{{item}}</span>
+              </a>
         </div>
         <div class="row justify-content-center">
           <div class="col-12 d-md-none d-block mb-3">
-            <div class="list-group sticky-top"
-                 style="top:66px">
+            <div class="list-group">
               <a href="#"
                  class="list-group-item list-group-item-action"
                  :class="{'active':active==='all'}"
@@ -139,14 +139,7 @@ export default {
   methods: {
     products () {
       this.$store.dispatch('Mproduct/getProducts').then(() => {
-        // let map = []
         this.product = this.$store.state.Mproduct.product
-        // this.product.forEach((item) => {
-        //   map.push(item.category)
-        // })
-        // this.categories = map.filter((item, index, arr) => {
-        //   return arr.indexOf(item) === index
-        // })
         const categories = new Set()
         this.product.forEach((item) => {
           categories.add(item.category)

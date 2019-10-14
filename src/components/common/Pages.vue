@@ -115,13 +115,16 @@ export default {
     scroolpage (page) {
       this.pagedata(page)
       if (this.makeout === 'product') {
-        let target = $('.l-scrool')
+        let target = $('.scroll-top')
         let targetHeight = target.offset().top
-        let margin = target.outerHeight(true) - target.outerHeight()
-        let NavbarHeight = $('.nav-fixed').height()
-        $(window).scrollTop(targetHeight - NavbarHeight - margin)
+        let NavbarHeight = $('.nav').outerHeight()
+        $('html, body').animate({
+          scrollTop: targetHeight - (NavbarHeight * 2)
+        }, 500, 'swing')
       } else {
-        $(window).scrollTop(0)
+        $('html, body').animate({
+          scrollTop: 0
+        }, 500, 'swing')
       }
     },
 

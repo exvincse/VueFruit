@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="input-group mb-5 mt-3 mt-lg-0 client-select mx-auto">
+    <div class="product-search input-group mb-5 mt-3 mt-lg-0 mx-auto">
          <input type="text"
              class="form-control pr-5"
              placeholder="搜尋商品"
              v-model.trim="searchname"
              @keyup.enter="search()">
-          <button class="btn clear" style="z-index:20"
+          <button class="btn product-search-clear" style="z-index:20"
             v-if="claer"
             @click="ClearSearch()">
             <i class="fas fa-times"></i>
@@ -16,38 +16,39 @@
                 @click="search()">搜尋</button>
       </div>
     </div>
+
     <div v-if="ary.length">
       <div class="text-center h3" v-if="searchshow">已搜尋到{{ary.length}}個商品</div>
       <div class="row">
         <div class="col-lg-6 col-xl-4 mb-4"
              v-for="item in pageproduct"
              :key="item.id">
-            <div class="card h-100 card-shadow">
-              <div class="card-position"
-                    style="padding-top: 70%; background-size: cover; background-position: center"
+            <div class="product-item">
+              <div class="product-item-img"
                    :style="{backgroundImage:`url(${item.imageUrl})`}">
-              <div class="d-none d-md-block">
-               <a href="#" class="TopMore d-flex align-items-center justify-content-center"
-                 style="text-decoration: none"
-                 @click.prevent="gotoproduct(item.id)">
-                  <span class="product-more">更多資訊</span>
-               </a>
-              </div>
+                <div class="d-none d-md-block">
+                  <a href="#" class="product-item-link"
+                    @click.prevent="gotoproduct(item.id)">
+                      <span class="product-more">更多資訊</span>
+                  </a>
+                </div>
               </div>
 
-              <div class="card-body d-flex flex-column">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="product-item-content">
+                <div class="product-item-title mb-3">
                   <h5 class="card-title mb-0">
                     <span href="#"
                           class="text-dark">{{item.title}}</span>
                   </h5>
-                  <h6 class="mb-0"><span class="badge ml-2"
+
+                  <h6 class="mb-0">
+                    <span class="badge ml-2"
                           :class="item.color">{{item.category}}</span></h6>
                 </div>
 
-                <p class="card-text body">{{item.content}}</p>
+                <p class="product-item-text card-text">{{item.content}}</p>
 
-                <div class="footer d-flex justify-content-between align-items-baseline">
+                <div class="product-item-price">
                   <div class="h5"
                        v-if="!item.origin_price">售價 {{item.price}} 元</div>
                   <del class="h6 text-secondary"
@@ -57,14 +58,14 @@
                 </div>
               </div>
 
-              <div class="card-footer d-flex bg-white">
+              <div class="product-item-footer d-flex bg-white">
                 <button type="button"
                         class="btn btn-outline-primary btn-sm d-md-none d-block"
                         @click="gotoproduct(item.id)">
                   查看更多
                 </button>
                 <button type="button"
-                        class="btn btn-Lorange ml-auto ml-md-0 btn-w"
+                        class="btn btn-Lorange ml-auto ml-md-0 addbtn"
                         @click="addtoCart(item.id)"
                         :disabled="loading===item.id">
                   <i class="fas fa-spinner fa-spin"
@@ -115,11 +116,12 @@ export default {
   watch: {
     active () {
       this.datafilter()
-      let target = $('.l-scrool')
+      let target = $('.scroll-top')
       let targetHeight = target.offset().top
-      let NavbarHeight = $('.nav-fixed').height()
-      let margin = target.outerHeight(true) - target.outerHeight()
-      $(window).scrollTop(targetHeight - NavbarHeight - margin)
+      let NavbarHeight = $('.nav').outerHeight()
+      $('html, body').animate({
+        scrollTop: targetHeight - (NavbarHeight * 2)
+      }, 500, 'swing')
     }
   },
   computed: {

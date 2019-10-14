@@ -213,7 +213,13 @@
   }
 }
 .mobile-new-message{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: left;
+  @media (max-width:768px){
+    text-align: center;
+  }
   .item{
     overflow: hidden;
     text-overflow: ellipsis;
@@ -234,33 +240,6 @@
 
 .btn:focus {
   box-shadow: none;
-}
-
-
-
-.card-position {
-  position: relative;
-
-  .l-top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    writing-mode: vertical-lr
-  }
-  .TopMore{
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    background-color: rgba(0, 0, 0, .6);
-    transition: 0.5s;
-  }
-  &:hover{
-    .TopMore{
-      opacity: 1;
-    }
-  }
 }
 
 .l-btn {

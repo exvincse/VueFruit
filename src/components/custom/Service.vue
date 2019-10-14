@@ -59,9 +59,6 @@
   </div>
 </template>
 
-<script>
-export default {}
-</script>
 <style lang="scss" scoped>
 .new-bg{
   background-image:url('../../assets/img/service-bg.jpg');

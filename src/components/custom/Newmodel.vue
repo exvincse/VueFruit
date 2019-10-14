@@ -7,10 +7,6 @@
     </div>
 </template>
 
-<script>
-export default {}
-</script>
-
 <style lang="scss" scoped>
   .header-bg{
      background-image:url('../../assets/img/news-bg.jpg');

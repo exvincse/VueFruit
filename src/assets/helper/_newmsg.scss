@@ -1,10 +1,25 @@
-.breadcrumb .link-hov{
+// newmsg
+.breadcrumb .item-link{
     text-decoration:none;
+    color: $lgray;
     &:hover{
         color: $Lorange !important;
     }
  }
- .msg{
+ .new-msg-list{
+   .new-msg-title{
+     color: $white;
+     background-color: $Lorange;
+   }
+    .new-msg-item{
+      text-decoration: none;
+      background-color: $lightgray;
+      color: $black;
+      &:hover{
+          color: $white;
+          background-color: $Lorange;
+      }
+    }
    .msgactive{
       color:$white !important;
       background-color: $Lorange !important;
@@ -13,33 +28,17 @@
          background-color: $Lorange !important;
       }
    }
-   .msg-title{
-      text-decoration: none;
-      &:hover{
-          color:$white !important;
-          background-color: $Lorange !important;
-      }
-   }
 }
- .top-title,.time{
+ .all-msg-title{
     border-bottom: 1px solid $borgray;
  }
- .time {
-    border-top: 1px solid $borgray;
- }
- .titleborder{
-    border-bottom: 1px dashed $borgray;
- }
-
- .img-pic{
-   @include media-breakpoint-up(lg) { 
-      max-width:190px;
-      max-height:190px;
-   }
- }
- .service-pic{
-   @include media-breakpoint-up(lg) { 
-      width:260px;
-      height:165px
-   }
+ .mobile-message{
+    display: flex;
+    flex-direction: column;
+    .mobile-message-item{
+       max-width: 390px;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       white-space: nowrap;
+    }
  }

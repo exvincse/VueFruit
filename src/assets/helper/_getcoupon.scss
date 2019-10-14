@@ -1,0 +1,21 @@
+.coupon-exp{
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    text-align: center;
+    background-color: $white;
+  }
+  .coupon-bg{
+    position: relative;
+    &::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      opacity: 0.6;
+    }
+  }
+  .coupon-modal{
+    top: 128px;
+  }
