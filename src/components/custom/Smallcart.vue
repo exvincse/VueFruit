@@ -16,7 +16,7 @@
           <div class="h-100 d-flex flex-column justify-content-between" v-if="data.carts.length">
             <div>
               <h5>已選擇商品</h5>
-              <div class="table-reponsuve">
+              <div class="table-reponsive">
                 <table class="table">
                   <tbody>
                     <tr v-for="item in data.carts"

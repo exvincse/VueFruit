@@ -120,11 +120,11 @@ export default {
         let target = $('.scroll-top')
         let targetHeight = target.offset().top
         let NavbarHeight = $('.nav').outerHeight()
-        $('html, body').animate({
+        $('html, body').stop(true, true).delay(200).animate({
           scrollTop: targetHeight - (NavbarHeight * 2)
         }, 500, 'swing')
       } else {
-        $('html, body').animate({
+        $('html, body').stop(true, true).delay(200).animate({
           scrollTop: 0
         }, 500, 'swing')
       }

@@ -11,7 +11,7 @@
   padding: 8px 16px;
   .menu{
     position: relative;
-    @media (max-width:768px) {
+    @include pad() {
       background: linear-gradient(180deg, #3c3c3c, rgba(0,0,0,0.9));
       position: fixed;
       max-height: 0;
@@ -31,7 +31,7 @@
     display: flex;
     flex-direction: row;
     padding: 0;
-    @media (max-width:768px) {
+    @include pad() {
       flex-direction: column;
       padding: 10px 20px;
     }
@@ -41,7 +41,7 @@
       padding:10px;
     }
     .menu-item{
-      @media (max-width:768px) {
+      @include pad() {
         padding-bottom: 10px;
       }
     }
@@ -76,23 +76,15 @@
         z-index: -1;
       }
       &:active,&:hover{
+        color: $white;
         &::after {
           width: 100%;
           z-index: 100;
         }
       }
-      @media (max-width:768px) { 
-        &:hover {
-          color: $white;
-          &::after {
-            width: 100%;
-            z-index: 100;
-          }
-        }
-      }
     }
-    .l-active {
-      color: $primary !important;
+    .menu-item-active {
+      color: $primary;
       &::after {
         width: 100%;
         z-index: 100;
@@ -105,7 +97,7 @@
   background:transparent;
   border: none !important;
   outline: none !important;
-  @media (max-width:768px) {
+  @include pad() {
     height:38px;
     display: block;
   }
@@ -183,11 +175,11 @@
   }
   .pic-view{
     opacity: 0;
-    color: #fff;
+    color: $white;
     line-height: 50px;
     padding: 0.5rem;
     position:absolute;
-    border: 2px solid #fff;
+    border: 2px solid $white;
     top: 0;
     right: 0;
     bottom: 0;
@@ -217,7 +209,7 @@
   flex-direction: column;
   align-items: center;
   text-align: left;
-  @media (max-width:768px){
+  @include pad(){
     text-align: center;
   }
   .item{
@@ -225,7 +217,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 390px;
-    @media (max-width:768px) {
+    @include pad() {
       max-width: 350px;
     }
     @include iphone5() {
@@ -237,21 +229,10 @@
   text-align: center;
   background-color:#F1F6F9;
 }
-.fw{
-  font-weight: bold;
-}
-.over {
-  overflow: hidden;
-}
 
 .btn:focus {
   box-shadow: none;
 }
-
-.l-btn {
-  border-radius: 0;
-}
-
 
 .animate-top{
   transform: translateY(100px);

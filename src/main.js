@@ -1,16 +1,19 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+
 import VeeValidate from 'vee-validate'
+import zhTW from 'vee-validate/dist/locale/zh_TW'
+
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import 'bootstrap'
 import '@fortawesome/fontawesome-free/css/all.css'
-import 'swiper/dist/css/swiper.css'
-import zhTW from 'vee-validate/dist/locale/zh_TW'
+
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
+
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'

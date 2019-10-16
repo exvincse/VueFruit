@@ -37,7 +37,7 @@
                       </div>
                     </div>
                     <button
-                       class="btn btn-w-color1 btn-lg l-btn"
+                       class="btn btn-w-color1 btn-lg rounded-0"
                        @click="addtoCart(item.product.id)"
                        :disabled="loading===item.product.id">
                       <span class="h4 font-weight-bold text-tea">
@@ -86,7 +86,7 @@
                       </div>
                     </div>
                     <button
-                       class="btn btn-w-color1 btn-lg l-btn"
+                       class="btn btn-w-color1 btn-lg rounded-0"
                        @click="addtoCart(item.product.id)"
                        :disabled="loading===item.product.id">
                       <span class="h4 font-weight-bold text-tea">

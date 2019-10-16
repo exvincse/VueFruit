@@ -14,24 +14,24 @@
         <ul class="h6">
           <li class="menu-item">
             <router-link class="menu-item-border"
-                          exact-active-class="l-active"
+                          exact-active-class="menu-item-active"
                           to="/newmsg">最新消息</router-link>
           </li>
           <li class="menu-item">
             <router-link class="menu-item-border"
-                          exact-active-class="l-active"
+                          exact-active-class="menu-item-active"
                           to="/index">首頁</router-link>
           </li>
           <li class="menu-item">
             <router-link class="menu-item-border"
-                          exact-active-class="l-active"
+                          exact-active-class="menu-item-active"
                           to="/products">商品</router-link>
 
           </li>
           <li class="menu-item">
             <router-link to="/getcoupon"
                         class="menu-item-border"
-                        exact-active-class="l-active">
+                        exact-active-class="menu-item-active">
               獲取優惠卷</router-link>
           </li>
         </ul>
