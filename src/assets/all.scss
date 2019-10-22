@@ -1,3 +1,7 @@
+@font-face{
+    font-family: Roboto;
+    src: url('~@/assets/fonts/Roboto-Regular.ttf');
+}
 @import "helper/grid";
 @import "~bootstrap/scss/functions";
 @import "helper/variables";
@@ -9,4 +13,3 @@
 @import "helper/checkout";
 @import "helper/article";
 @import "helper/getcoupon";
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap');

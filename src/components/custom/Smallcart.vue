@@ -97,7 +97,7 @@ export default {
 .table td {
   vertical-align: middle;
 }
-.table-reponsuve{
+.table-reponsive{
   max-height: 200px;
   overflow-y: auto;
 }

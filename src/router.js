@@ -64,7 +64,9 @@ export default new Router({
           component: () => import('./components/custom/Products')
         },
         {
-          path: '/products/:id',
+          // name: 'moreproduct',
+          // path: '/moreproduct/:id',
+          path: '/moreproduct',
           component: () => import('./components/custom/Moreproduct')
         },
         {
@@ -76,7 +78,7 @@ export default new Router({
           component: () => import('./components/custom/Newmodel'),
           children: [
             {
-              path: '',
+              path: '/',
               component: () => import('./components/custom/Newmsg')
             },
             {

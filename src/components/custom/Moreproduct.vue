@@ -80,7 +80,7 @@ export default {
   },
   created () {
     // ajax獲取資料，並獲取route params
-    this.ProductId = this.$route.params.id
+    this.ProductId = this.$route.query.id
     this.getProduct()
   },
   methods: {

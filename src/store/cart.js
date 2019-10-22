@@ -72,6 +72,7 @@ export default {
   // 接收actions資料並賦值state，或做計算
   mutations: {
     GETCART (state, payload) {
+      payload.carts = payload.carts.reverse()
       state.data = payload
     },
     LOADINGITEM (state, payload) {

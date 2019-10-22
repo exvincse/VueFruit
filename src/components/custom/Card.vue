@@ -27,10 +27,16 @@
               <div class="product-item-img"
                    :style="{backgroundImage:`url(${item.imageUrl})`}">
                 <div class="d-none d-md-block">
-                  <a href="#" class="product-item-link"
+                  <!-- <a href="#" class="product-item-link"
                     @click.prevent="gotoproduct(item.id)">
                       <span class="product-more">更多資訊</span>
-                  </a>
+                  </a> -->
+                  <!-- <router-link :to="{name:'moreproduct',params:{id:item.id}}" class="product-item-link">
+                     <span class="product-more">更多資訊</span>
+                  </router-link> -->
+                  <router-link :to="{path:'/moreproduct',query:{id:item.id}}" class="product-item-link">
+                     <span class="product-more">更多資訊</span>
+                  </router-link>
                 </div>
               </div>
 

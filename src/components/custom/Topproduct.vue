@@ -14,10 +14,9 @@
                         <span class="hot-product-icon"></span>
                         <span class="hot-product-title">HOT</span>
                         <div class="d-none d-md-block">
-                          <a href="#" class="product-item-link"
-                            @click.prevent="gotoproduct(item.product.id)">
-                              <span class="product-more">更多資訊</span>
-                          </a>
+                          <router-link :to="{path:'/moreproduct',query:{id:item.product.id}}" class="product-item-link">
+                            <span class="product-more">更多資訊</span>
+                          </router-link>
                         </div>
                       </div>
                     </div>
@@ -228,10 +227,6 @@ export default {
     // 加入購物車
     addtoCart (id, qty = 1) {
       this.$store.dispatch('Mcart/addtocart', { id, qty })
-    },
-    // 前往特定商品
-    gotoproduct (id) {
-      this.$router.push(`/products/${id}`)
     }
   }
 }
