@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="d-flex">
-      <select class="custom-select mr-2 w-40"
+    <div class="d-lg-flex d-block">
+      <select class="custom-select"
               v-model="getyear"
               @change="changeMonth(getyear,getmonth)">
         <option value=""
@@ -12,7 +12,7 @@
                 :key="item">{{item}}</option>
       </select>
 
-      <select class="custom-select mr-2 w-40"
+      <select class="custom-select"
               v-model="getmonth"
               @change="changeMonth(getyear,getmonth)">
         <option value=""
@@ -23,7 +23,7 @@
                 :key="item">{{item}}</option>
       </select>
       <button type="button"
-              class="btn btn-primary w-40"
+              class="btn btn-primary clear-input"
               @click="clear()">清除欄位</button>
     </div>
   </div>

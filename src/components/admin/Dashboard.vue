@@ -6,7 +6,7 @@
       <div class="row">
         <sidebar></sidebar>
         <main role="main"
-              class="col-md-9 ml-sm-auto col-lg-10 px-4">
+              class="col-md-9 ml-sm-auto col-lg-10 px-lg-4 px-2">
           <router-view></router-view>
         </main>
       </div>

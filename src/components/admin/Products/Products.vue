@@ -44,9 +44,9 @@
             </tr>
           </tbody>
         </table>
-        <pages :ary="products"
-                  @getPageData="getPageData"></pages>
       </div>
+      <pages :ary="products"
+                  @getPageData="getPageData"></pages>
     </div>
 
     <div v-else

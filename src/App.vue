@@ -1,8 +1,6 @@
 <template>
   <div id="app">
     <alert></alert>
-    <!-- <loading :active.sync="loading"
-             style="z-index:9999;overflow-y:hidden;"></loading> -->
     <div class="loading" v-show="loading">
       <i class="fas fa-spinner fa-pulse fa-4x"></i>
       <span>請稍後...</span>
@@ -24,7 +22,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scope="this api replaced by slot-scope in 2.5.0+">
   @import "./assets/all";
   .loading{
     position: fixed;

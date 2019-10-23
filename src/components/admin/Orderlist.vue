@@ -2,7 +2,7 @@
   <div v-if="orders.length">
     <div class="container mt-4">
       <div class="row">
-        <NavDate class="col-lg-5 mb-4 mb-lg-0"
+        <NavDate class="col-lg-6 mb-4 mb-lg-0"
                  @changeMonth="changeMonth"></NavDate>
         <NavSelect class="col-lg-3"
                    @select="select"></NavSelect>
@@ -11,7 +11,7 @@
       <div class="mt-2"
            v-if="ary.length">
         <div class="table-responsive">
-          <table class="table w-100">
+          <table class="table">
             <thead>
               <tr>
                 <th>購買時間</th>

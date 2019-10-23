@@ -55,13 +55,7 @@
 }
 
 [role="main"] {
-  padding-top: 133px;
-}
-
-@media (min-width: 768px) {
-  [role="main"] {
-    padding-top: 48px;
-  }
+  padding-top: 48px;
 }
 .side-list{
   list-style: none;
@@ -129,9 +123,12 @@
 }
 
 .question{
+  width: 100%;
+  @include media-breakpoint-up(lg) { 
   width: 70%;
-  label{
-    display: block;
+    label{
+      display: block;
+    }
   }
 }
 .l-select{
@@ -146,5 +143,29 @@
     @include pad() {
       max-height: 300px;
     }
+  }
+}
+.table{
+  tr td:nth-child(1) span{
+    display: block;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.custom-select{
+  margin-right: 10px;
+  margin-bottom: 0px;
+  @include pad() {
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+}
+.clear-input{
+  width: 300px;
+  @include pad() {
+    width: 100%;
   }
 }

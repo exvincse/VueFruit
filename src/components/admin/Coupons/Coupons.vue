@@ -30,7 +30,7 @@
             <tbody>
               <tr v-for="(item, key) in pagedata"
                   :key="key">
-                <td>{{ item.title }}</td>
+                <td><span>{{ item.title }}</span></td>
                 <td>{{ item.percent }}%</td>
                 <td>{{ item.due_date | DateFilter }}</td>
                 <td>
