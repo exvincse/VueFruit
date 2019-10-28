@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: './',
+  publicPath: '/',
   // npm i http-proxy-middleware --save
   devServer: {
     proxy: {
