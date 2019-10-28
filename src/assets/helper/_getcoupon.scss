@@ -6,6 +6,7 @@
   }
   .coupon-bg{
     position: relative;
+    min-height: 100vh;
     &::before{
       content: '';
       position: absolute;

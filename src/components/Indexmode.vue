@@ -93,7 +93,7 @@ export default {
     },
     // 監聽路由隱藏購物車
     CartShow () {
-      if (this.$route.path === '/cart') {
+      if (this.$route.path === '/cart' || this.$route.path.indexOf('newmsg') !== -1) {
         this.SmallCart = false
       } else {
         this.SmallCart = true

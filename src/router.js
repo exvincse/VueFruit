@@ -10,7 +10,6 @@ export default new Router({
       redirect: '/index'
     },
     {
-      name: '後台',
       path: '/admin',
       component: () => import('./components/admin/Dashboard'),
       meta: { requiresAuth: true },
@@ -43,7 +42,6 @@ export default new Router({
       ]
     },
     {
-      name: '登入',
       path: '/login',
       component: () => import('./components/Login')
     },
@@ -52,7 +50,7 @@ export default new Router({
       component: () => import('./components/Indexmode'),
       children: [
         {
-          path: '',
+          path: '/',
           component: () => import('./components/custom/Index')
         },
         {
@@ -98,6 +96,7 @@ export default new Router({
       component: () => import('./components/custom/Checkout'),
       children: [
         {
+          name: 'Paytype',
           path: 'paytype',
           component: () => import('./components/custom/Paytype')
         },

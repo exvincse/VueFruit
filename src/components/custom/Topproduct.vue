@@ -106,6 +106,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  props: ['topdata'],
   data () {
     return {
       swiperOption: {
@@ -143,7 +144,11 @@ export default {
   created () {
     // created時呼叫ajax把data資料準備好
     this.get()
-    this.getProducts()
+  },
+  watch: {
+    topdata () {
+      this.product = this.topdata
+    }
   },
   computed: {
     // 取得vuex計算資料
@@ -186,11 +191,11 @@ export default {
       })
     },
     // 取得商品資料
-    getProducts () {
-      this.$store.dispatch('Mproduct/getProducts').then(() => {
-        this.product = this.$store.state.Mproduct.product
-      })
-    },
+    // getProducts () {
+    //   this.$store.dispatch('Mproduct/getProducts').then(() => {
+    //     this.product = this.$store.state.Mproduct.product
+    //   })
+    // },
     // 排序所有資料銷售數
     sort () {
       let order = []
@@ -202,7 +207,7 @@ export default {
           order.push(item)
         })
       })
-      this.product.forEach((item, index) => {
+      this.topdata.forEach((item, index) => {
         let title = item.title
         let num = index
         popular.push({

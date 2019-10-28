@@ -103,7 +103,7 @@ export default {
   components: {
     pages
   },
-  props: ['active'],
+  props: ['active', 'getproduct'],
   data () {
     return {
       ary: [],
@@ -116,12 +116,12 @@ export default {
       filterdata: []
     }
   },
-  created () {
-    // created時呼叫ajax把data資料準備好
-    this.getProducts()
-  },
   watch: {
     // 點選分頁至頂或移動到特定地方
+    getproduct () {
+      this.ary = this.getproduct
+      this.datafilter()
+    },
     active () {
       this.datafilter()
       let target = $('.scroll-top')
@@ -137,14 +137,6 @@ export default {
     ...mapGetters('Mcart', ['loading'])
   },
   methods: {
-    // 呼叫vuex modules Mproduct/getProducts方法，並使用promise等待當前ajax結束後才取得資料
-    getProducts () {
-      this.$store.dispatch('Mproduct/getProducts').then(() => {
-        this.products = this.$store.state.Mproduct.product.slice()
-        this.ary = this.products
-        this.datafilter()
-      })
-    },
     // 呼叫時render分類
     datafilter () {
       this.ary = []
@@ -152,10 +144,10 @@ export default {
       this.claer = false
       this.searchshow = false
       if (this.active === 'all') {
-        this.ary = Array.prototype.slice.call(this.products)
+        this.ary = Array.prototype.slice.call(this.getproduct)
         this.filterdata = Array.prototype.slice.call(this.ary)
       } else {
-        this.products.forEach((item) => {
+        this.getproduct.forEach((item) => {
           if (item.is_enabled === 1 && item.category.indexOf(this.active) !== -1) {
             this.ary.push(item)
           }
@@ -196,9 +188,9 @@ export default {
       this.searchshow = false
       this.searchname = ''
       if (this.active === 'all') {
-        this.ary = Array.prototype.slice.call(this.products)
+        this.ary = Array.prototype.slice.call(this.getproduct)
       } else {
-        this.products.forEach((item) => {
+        this.getproduct.forEach((item) => {
           if (item.is_enabled === 1 && item.category.indexOf(this.active) !== -1) {
             this.ary.push(item)
           }

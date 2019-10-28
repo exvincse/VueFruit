@@ -13,7 +13,7 @@
 
     <section class="hot-product mt-3">
       <h2 class="my-4">熱門商品</h2>
-      <topProduct class="mb-4"></topProduct>
+      <topProduct class="mb-4" :topdata="data"></topProduct>
       <router-link to="/products" class="hot-product-btn btn btn-primary mb-5">
         MORE
       </router-link>

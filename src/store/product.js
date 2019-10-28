@@ -13,9 +13,7 @@ export default {
         const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
         axios.get(api).then((response) => {
           if (response.data.success) {
-            let filter = Object.values(response.data.products).map((item) => {
-              return item
-            })
+            let filter = Object.values(response.data.products).map(item => item)
             context.commit('PRODUCT', filter)
             context.commit('LOADING', false, { root: true })
             resolve()

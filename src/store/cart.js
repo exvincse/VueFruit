@@ -85,7 +85,7 @@ export default {
       state.hide = payload
     }
   },
-  // 回傳state資料給呼叫的原件computed
+  // 回傳state資料給呼叫的元件component
   getters: {
     data (state) {
       return state.data

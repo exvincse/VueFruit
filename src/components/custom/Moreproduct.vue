@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <section class="my-lg-7 mb-7" v-if="Product">
+  <div style="min-height: 100vh;">
+    <section class="mt-lg-2 mb-7" v-if="Product.title">
       <div class="container">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent px-0">
@@ -66,6 +66,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import $ from 'jquery'
 export default {
   data () {
     return {
@@ -90,12 +91,18 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${this.ProductId}`
       this.$http.get(api).then((response) => {
         if (response.data.success) {
-          response.data.product.num = 1
+          // response.data.product.num = 1
           this.Product = response.data.product
+          this.$set(this.Product, 'num', 1)
         } else {
           this.error = response.data.message
         }
         this.$store.dispatch('updateLoading', false)
+      }).then(() => {
+        $('.smallcart').css('bottom', '10px')
+        // this.$nextTick(() => {
+        //   $('.smallcart').css('bottom', '10px')
+        // })
       })
     },
     // 加入購物車

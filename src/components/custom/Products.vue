@@ -64,30 +64,30 @@
     <section class="mt-5 ">
       <div class="container scroll-top">
         <div class="product-category d-md-block d-none mb-5">
-              <a href="#"
-                 :class="{'category-active':active==='all'}"
-                 @click.prevent="active='all'">
-                <div class="bg-cover"
-                  style="background-image:url('https://images.unsplash.com/photo-1467540826941-623d5627c80b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
-                </div>
-                <span class="h4">所有商品</span>
-              </a>
-              <a href="#"
-                 v-for="item in categories" :key="item"
-                 class="ml-2 mb-2"
-                 :class="{'category-active':active===item}"
-                 @click.prevent="active=item"
-                 >
-                <div class="bg-cover"
-                  v-if="item==='水果'"
-                  style="background-image:url('https://images.unsplash.com/photo-1560968591-1d39044e5110?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
-                </div>
-                <div class="bg-cover"
-                  v-else-if="item==='飲料'"
-                  style="background-image:url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
-                </div>
-                <span class="h4">{{item}}</span>
-              </a>
+            <a href="#"
+                :class="{'category-active':active==='all'}"
+                @click.prevent="active='all'">
+              <div class="bg-cover"
+                style="background-image:url('https://images.unsplash.com/photo-1467540826941-623d5627c80b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
+              </div>
+              <span class="h4">所有商品</span>
+            </a>
+            <a href="#"
+                v-for="item in categories" :key="item"
+                class="ml-2 mb-2"
+                :class="{'category-active':active===item}"
+                @click.prevent="active=item"
+                >
+              <div class="bg-cover"
+                v-if="item==='水果'"
+                style="background-image:url('https://images.unsplash.com/photo-1560968591-1d39044e5110?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
+              </div>
+              <div class="bg-cover"
+                v-else-if="item==='飲料'"
+                style="background-image:url('https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60')">
+              </div>
+              <span class="h4">{{item}}</span>
+            </a>
         </div>
         <div class="row justify-content-center">
           <div class="col-12 d-md-none d-block mb-3">
@@ -111,7 +111,8 @@
           </div>
 
           <div class="col-lg-12">
-            <card :active='active'></card>
+            <card :getproduct='getproduct'
+                  :active='active'></card>
           </div>
         </div>
       </div>
@@ -126,7 +127,7 @@ export default {
     return {
       active: 'all',
       test: '',
-      product: [],
+      getproduct: [],
       categories: []
     }
   },
@@ -141,12 +142,18 @@ export default {
     // 呼叫Vuex modules Mproduct/getProducts方法，並使用promise等待當前ajax結束後才取得資料
     products () {
       this.$store.dispatch('Mproduct/getProducts').then(() => {
-        this.product = this.$store.state.Mproduct.product
-        const categories = new Set()
-        this.product.forEach((item) => {
-          categories.add(item.category)
+        this.getproduct = this.$store.state.Mproduct.product
+        this.categories = this.getproduct.map((item) => {
+          return item.category
+        }).filter((item, index, arr) => {
+          return arr.indexOf(item) === index
         })
-        this.categories = Array.from(categories)
+
+        // const categories = new Set()
+        // this.product.forEach((item) => {
+        //   categories.add(item.category)
+        // })
+        // this.categories = Array.from(categories)
       })
     }
   }

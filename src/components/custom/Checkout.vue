@@ -71,7 +71,9 @@
               </div>
             </div>
             <div class="col-lg-8 p-lg-5 pay">
-              <router-view></router-view>
+              <keep-alive :include="page">
+                <router-view></router-view>
+              </keep-alive>
             </div>
           </div>
       </div>
@@ -107,6 +109,7 @@ import $ from 'jquery'
 export default {
   data () {
     return {
+      page: ['Paytype'],
       check: false,
       orderid: '',
       order: {
