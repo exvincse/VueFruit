@@ -209,13 +209,12 @@ export default {
       }).then((response) => {
         if (response.data.success) {
           this.$set(this.tempproduct, 'imageUrl', response.data.imageUrl)
-          let message = response.data.message
-          this.$store.dispatch('updateMessage', { message, status: 'success' })
-          this.status.fileUploading = false
+          this.$store.dispatch('updateMessage', { message: '上傳圖片成功', status: 'success' })
         } else {
-          let message = response.data.message
-          this.$store.dispatch('updateMessage', { message, status: 'danger' })
+          this.$store.dispatch('updateMessage', { message: '上傳圖片失敗', status: 'danger' })
         }
+        this.status.fileUploading = false
+        this.$refs.files.value = ''
       })
     },
     // 通過驗證時觸發父層元件方法並傳遞資料

@@ -138,11 +138,22 @@ export default {
     // 驗證題目欄位是否都正確
     submitpage () {
       this.$store.dispatch('updateLoading', true)
+
+      let fil = this.choose.filter((item, index, ary) => {
+        return ary.indexOf(item) !== index
+      })
       this.$validator.validate().then((valid) => {
         let check = this.choose.some((item) => {
           return item.indexOf(this.ans) !== -1
         })
         if (valid) {
+          if (fil.length) {
+            this.error = true
+            this.errormsg = '正確答案有重複'
+            $('.modal').modal('show')
+            this.$store.dispatch('updateLoading', false)
+            return false
+          }
           if (!check) {
             this.error = true
             this.errormsg = '題目答案與正確答案不符'

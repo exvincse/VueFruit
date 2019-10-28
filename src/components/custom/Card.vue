@@ -91,7 +91,6 @@
     <pages :ary="ary"
            :makeout="'product'"
            @getPageData="getPageData"></pages>
-
   </div>
 </template>
 
