@@ -204,7 +204,12 @@ export default {
       //     id
       //   }
       // })
-      this.$router.push(`/products/${id}`)
+      this.$router.push({
+        path: '/moreproduct',
+        query: {
+          id
+        }
+      })
     }
   }
 }

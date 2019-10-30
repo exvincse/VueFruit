@@ -72,7 +72,6 @@ export default new Vuex.Store({
   // 回傳state資料給呼叫的原件computed
   getters: {
     messages (state) {
-      console.log(state.message)
       return state.message
     },
     loading (state) {

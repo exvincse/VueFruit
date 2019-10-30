@@ -41,6 +41,7 @@ export default {
             let message = response.data.message + `商品`
             context.dispatch('updateMessage', { message, status: 'danger' }, { root: true })
             context.commit('DISABLE', id)
+            // context.dispatch('Mproduct/getProducts')
             context.commit('LOADING', false, { root: true })
             resolve()
           }
