@@ -29,10 +29,9 @@
 
           </li>
           <li class="menu-item">
-            <router-link to="/getcoupon"
-                        class="menu-item-border"
-                        exact-active-class="menu-item-active">
-              獲取優惠卷</router-link>
+            <router-link class="menu-item-border"
+                          exact-active-class="menu-item-active"
+                          to="/getcoupon">獲取優惠卷</router-link>
           </li>
         </ul>
       </div>

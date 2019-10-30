@@ -61,12 +61,6 @@
                           style="height:220px">
                         <span class="hot-product-icon"></span>
                         <span class="hot-product-title">HOT</span>
-                        <div class="d-none d-md-block">
-                          <router-link :to="{path:'/moreproduct',query:{id:item.product.id}}"
-                            class="product-item-link">
-                            <span class="product-more">更多資訊</span>
-                          </router-link>
-                        </div>
                       </div>
                     </div>
                     <div class="d-flex text-center">
@@ -95,10 +89,9 @@
                     </button>
                   </div>
             </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
+            <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
-
       </div>
     </section>
   </div>
