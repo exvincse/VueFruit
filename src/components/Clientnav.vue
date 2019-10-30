@@ -13,19 +13,19 @@
       <div class="menu" :class="{'menu-show':navshow}">
         <ul class="h6">
           <li class="menu-item">
-            <router-link class="menu-item-border"
+            <router-link  class="menu-item-border"
                           exact-active-class="menu-item-active"
                           to="/newmsg">最新消息</router-link>
           </li>
           <li class="menu-item">
-            <router-link class="menu-item-border"
+            <router-link  class="menu-item-border"
                           exact-active-class="menu-item-active"
                           to="/index">首頁</router-link>
           </li>
           <li class="menu-item">
             <router-link class="menu-item-border"
-                          exact-active-class="menu-item-active"
-                          to="/products">商品</router-link>
+                         exact-active-class="menu-item-active"
+                         to="/products">商品</router-link>
 
           </li>
           <li class="menu-item">
