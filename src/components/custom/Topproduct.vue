@@ -3,7 +3,7 @@
     <section class="my-3">
       <div class="container">
         <div class="d-lg-block d-none">
-          <swiper :options="swiperOption">
+          <swiper :options="swiperOption" v-if="total_sort.length">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
                   <div class="card mb-5">
@@ -46,11 +46,11 @@
                     </button>
                   </div>
             </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
+            <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
 
-        <div class="d-lg-none d-block">
+        <div class="d-lg-none d-block" v-if="total_sort.length">
           <swiper :options="RWDswiperOption">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
@@ -61,8 +61,9 @@
                           style="height:220px">
                         <span class="hot-product-icon"></span>
                         <span class="hot-product-title">HOT</span>
-                        <div class="d-block">
-                          <router-link :to="{path:'/moreproduct',query:{id:item.product.id}}" class="product-item-link">
+                        <div class="d-none d-md-block">
+                          <router-link :to="{path:'/moreproduct',query:{id:item.product.id}}"
+                            class="product-item-link">
                             <span class="product-more">更多資訊</span>
                           </router-link>
                         </div>
@@ -94,9 +95,10 @@
                     </button>
                   </div>
             </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
+          <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
+
       </div>
     </section>
   </div>
