@@ -2,7 +2,7 @@
   <div>
     <section class="my-3">
       <div class="container">
-        <div class="d-lg-block d-none">
+        <div class="">
           <swiper :options="swiperOption" v-if="total_sort.length">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
@@ -50,10 +50,10 @@
           </swiper>
         </div>
 
-        <div class="d-lg-none d-block" v-if="total_sort.length">
+        <!-- <div class="d-lg-none d-block" v-if="total_sort.length">
           <swiper :options="RWDswiperOption">
             <swiper-slide v-for="item in total_sort"
-                   :key="item.product.id" style="width: 350px; margin-right: 30px;">
+                   :key="item.product.id" style="width:350px;margin-right:30px;">
                   <div class="card mb-5">
                     <div class="product-item">
                       <div class="product-item-img"
@@ -78,8 +78,7 @@
                         </div>
                       </div>
                     </div>
-                    <button
-                       class="btn btn-w-color1 btn-lg rounded-0"
+                    <button class="btn btn-w-color1 btn-lg rounded-0"
                        @click="addtoCart(item.product.id)"
                        :disabled="loading===item.product.id">
                       <span class="h4 font-weight-bold text-tea">
@@ -91,7 +90,7 @@
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
-        </div>
+        </div> -->
       </div>
     </section>
   </div>
@@ -104,7 +103,7 @@ export default {
   data () {
     return {
       swiperOption: {
-        slidesPerView: 4,
+        slidesPerView: 1,
         spaceBetween: 30,
         autoplay: {
           delay: 3000,
