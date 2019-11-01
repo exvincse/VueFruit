@@ -32,7 +32,7 @@
                     v-for="(name,number) in item.chenckq" :key="number">
                     <input type="radio" class="custom-control-input"
                       :id="name" :value="name" v-model="check" :checked='checkeed'>
-                    <label class="custom-control-label"
+                    <label class="custom-control-label cursor"
                       :for="name">{{name}}</label>
                   </div>
                   <a href="#" class="btn btn-primary mt-3"

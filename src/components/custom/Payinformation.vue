@@ -67,8 +67,9 @@
 
                 <div class="mx-2">/</div>
                 <select name="year" id="year" class="custom-select w-30">
-                  <option v-for="n in date" v-if="n >= 1990"
-                    :value='n' :key="n">{{n}}</option>
+                  <option :value='date'>{{date}}</option>
+                  <option v-for="n in 18"
+                    :value='date - n' :key="date - n">{{date - n}}</option>
                 </select>
                 <span>年</span>
               </div>
