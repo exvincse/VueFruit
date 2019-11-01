@@ -31,6 +31,7 @@
                   <div class="custom-control custom-radio"
                     v-for="(name,number) in item.chenckq" :key="number">
                     <input type="radio" class="custom-control-input"
+                      ref="radio"
                       :id="name" :value="name" v-model="check" :checked='checkeed'>
                     <label class="custom-control-label cursor"
                       :for="name">{{name}}</label>
@@ -148,15 +149,19 @@ export default {
       if (this.onequestion[this.id].ans === this.check) {
         this.ans = '答對了'
         this.corss = true
-        this.checkeed = false
         this.qcount += 1
         let time = setTimeout(() => {
-          this.nextq()
           this.modalshow = true
           if (this.id <= 2) {
             $('#exampleModal').modal('show')
           }
+          this.nextq()
           clearTimeout(time)
+          this.$nextTick(() => {
+            this.$refs.radio.forEach((item) => {
+              item.checked = false
+            })
+          })
           this.$store.dispatch('updateLoading', false)
         }, 1000)
       } else {
