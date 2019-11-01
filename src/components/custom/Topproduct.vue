@@ -2,56 +2,56 @@
   <div>
     <section class="my-3">
       <div class="container">
-        <div class="">
+        <div class="d-lg-block d-none">
           <swiper :options="swiperOption" v-if="total_sort.length">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
-                  <div class="card mb-5">
-                    <div class="product-item">
-                      <div class="product-item-img"
-                          :style="{backgroundImage:`url(${item.product.imageUrl})`}"
-                          style="height:220px">
-                        <span class="hot-product-icon"></span>
-                        <span class="hot-product-title">HOT</span>
-                        <div class="d-none d-md-block">
-                          <router-link :to="{path:'/moreproduct',query:{id:item.product.id}}" class="product-item-link">
-                            <span class="product-more">更多資訊</span>
-                          </router-link>
-                        </div>
-                      </div>
+              <div class="card mb-5">
+                <div class="product-item">
+                  <div class="product-item-img"
+                      :style="{backgroundImage:`url(${item.product.imageUrl})`}"
+                      style="height:220px">
+                    <span class="hot-product-icon"></span>
+                    <span class="hot-product-title">HOT</span>
+                    <div class="d-none d-md-block">
+                      <router-link :to="{path:'/moreproduct',query:{id:item.product.id}}" class="product-item-link">
+                        <span class="product-more">更多資訊</span>
+                      </router-link>
                     </div>
-                    <div class="d-flex text-center">
-                      <div class="col-7">
-                        <div class="border-right py-3 text-tea">
-                          <strong class="h5">{{item.product.title}}</strong>
-                        </div>
-                      </div>
-                      <div class="col-5">
-                        <div class="py-3 text-tea">
-                          <strong class="h6"
-                                  v-if="item.product.origin_price">{{item.product.price}} 元</strong>
-                          <strong class="h6"
-                                  v-else>{{item.product.origin_price}} 元</strong>
-                        </div>
-                      </div>
-                    </div>
-                    <button
-                       class="btn btn-w-color1 btn-lg rounded-0"
-                       @click="addtoCart(item.product.id)"
-                       :disabled="loading===item.product.id">
-                      <span class="h4 font-weight-bold text-tea">
-                        <i class="fas fa-spinner fa-spin"
-                           v-if="loading===item.product.id"></i>
-                        加入購物車</span>
-                    </button>
                   </div>
+                </div>
+                <div class="d-flex text-center">
+                  <div class="col-7">
+                    <div class="border-right py-3 text-tea">
+                      <strong class="h5">{{item.product.title}}</strong>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="py-3 text-tea">
+                      <strong class="h6"
+                              v-if="item.product.origin_price">{{item.product.price}} 元</strong>
+                      <strong class="h6"
+                              v-else>{{item.product.origin_price}} 元</strong>
+                    </div>
+                  </div>
+                </div>
+                <button
+                    class="btn btn-w-color1 btn-lg rounded-0"
+                    @click="addtoCart(item.product.id)"
+                    :disabled="loading===item.product.id">
+                  <span class="h4 font-weight-bold text-tea">
+                    <i class="fas fa-spinner fa-spin"
+                        v-if="loading===item.product.id"></i>
+                    加入購物車</span>
+                </button>
+              </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
 
-        <!-- <div class="d-lg-none d-block" v-if="total_sort.length">
-          <swiper :options="RWDswiperOption">
+        <div class="d-lg-none d-block">
+          <swiper :options="RWDswiperOption" v-if="total_sort.length">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width:350px;margin-right:30px;">
                   <div class="card mb-5">
@@ -88,9 +88,9 @@
                     </button>
                   </div>
             </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
+            <div class="RWDswiper-pagination" slot="pagination"></div>
           </swiper>
-        </div> -->
+        </div>
       </div>
     </section>
   </div>
@@ -103,7 +103,7 @@ export default {
   data () {
     return {
       swiperOption: {
-        slidesPerView: 1,
+        slidesPerView: 4,
         spaceBetween: 30,
         autoplay: {
           delay: 3000,
@@ -124,7 +124,7 @@ export default {
         },
         speed: 1000,
         pagination: {
-          el: '.swiper-pagination',
+          el: '.RWDswiper-pagination',
           clickable: true
         }
       },
@@ -183,12 +183,6 @@ export default {
         }
       })
     },
-    // 取得商品資料
-    // getProducts () {
-    //   this.$store.dispatch('Mproduct/getProducts').then(() => {
-    //     this.product = this.$store.state.Mproduct.product
-    //   })
-    // },
     // 排序所有資料銷售數
     sort () {
       let order = []
