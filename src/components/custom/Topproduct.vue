@@ -53,40 +53,46 @@
         <div class="d-lg-none d-flex">
           <swiper :options="RWDswiperOption">
             <swiper-slide v-for="item in total_sort"
-                   :key="item.product.id" style="width:350px;margin-right:30px;">
-                  <div class="card mb-5">
-                    <div class="product-item">
-                      <div class="product-item-img"
-                          :style="{backgroundImage:`url(${item.product.imageUrl})`}"
-                          style="height:220px">
-                        <span class="hot-product-icon"></span>
-                        <span class="hot-product-title">HOT</span>
-                      </div>
+                   :key="item.product.id" style="width: 350px; margin-right: 30px;">
+              <div class="card mb-5">
+                <div class="product-item">
+                  <div class="product-item-img"
+                      :style="{backgroundImage:`url(${item.product.imageUrl})`}"
+                      style="height:220px">
+                    <span class="hot-product-icon"></span>
+                    <span class="hot-product-title">HOT</span>
+                    <div class="d-none d-md-block">
+                      <router-link :to="{path:'/moreproduct',query:{id:item.product.id}}" class="product-item-link">
+                        <span class="product-more">更多資訊</span>
+                      </router-link>
                     </div>
-                    <div class="d-flex text-center">
-                      <div class="col-7">
-                        <div class="border-right py-3 text-tea">
-                          <strong class="h5">{{item.product.title}}</strong>
-                        </div>
-                      </div>
-                      <div class="col-5">
-                        <div class="py-3 text-tea">
-                          <strong class="h6"
-                                  v-if="item.product.origin_price">{{item.product.price}} 元</strong>
-                          <strong class="h6"
-                                  v-else>{{item.product.origin_price}} 元</strong>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="btn btn-w-color1 btn-lg rounded-0"
-                       @click="addtoCart(item.product.id)"
-                       :disabled="loading===item.product.id">
-                      <span class="h4 font-weight-bold text-tea">
-                        <i class="fas fa-spinner fa-spin"
-                           v-if="loading===item.product.id"></i>
-                        加入購物車</span>
-                    </button>
                   </div>
+                </div>
+                <div class="d-flex text-center">
+                  <div class="col-7">
+                    <div class="border-right py-3 text-tea">
+                      <strong class="h5">{{item.product.title}}</strong>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="py-3 text-tea">
+                      <strong class="h6"
+                              v-if="item.product.origin_price">{{item.product.price}} 元</strong>
+                      <strong class="h6"
+                              v-else>{{item.product.origin_price}} 元</strong>
+                    </div>
+                  </div>
+                </div>
+                <button
+                    class="btn btn-w-color1 btn-lg rounded-0"
+                    @click="addtoCart(item.product.id)"
+                    :disabled="loading===item.product.id">
+                  <span class="h4 font-weight-bold text-tea">
+                    <i class="fas fa-spinner fa-spin"
+                        v-if="loading===item.product.id"></i>
+                    加入購物車</span>
+                </button>
+              </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
