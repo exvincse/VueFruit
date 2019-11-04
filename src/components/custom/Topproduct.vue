@@ -2,7 +2,7 @@
   <div>
     <section class="my-3">
       <div class="container">
-        <div class="d-block">
+        <div class="d-lg-block d-none">
           <swiper :options="swiperOption">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
@@ -50,7 +50,7 @@
           </swiper>
         </div>
 
-        <!-- <div class="d-lg-none d-flex">
+        <div class="d-lg-none d-block">
           <swiper :options="RWDswiperOption">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
@@ -96,7 +96,7 @@
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
-        </div> -->
+        </div>
       </div>
     </section>
   </div>
@@ -109,7 +109,7 @@ export default {
   data () {
     return {
       swiperOption: {
-        slidesPerView: 1,
+        slidesPerView: 4,
         spaceBetween: 30,
         autoplay: {
           delay: 3000,
@@ -136,17 +136,12 @@ export default {
       },
       orders: [],
       ary: [],
-      product: [],
       total_sort: []
     }
   },
-  created () {
-    // created時呼叫ajax把data資料準備好
-    this.get()
-  },
   watch: {
     topdata () {
-      this.product = this.topdata
+      this.get()
     }
   },
   computed: {
