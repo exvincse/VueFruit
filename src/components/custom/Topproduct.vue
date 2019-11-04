@@ -109,7 +109,7 @@ export default {
   data () {
     return {
       swiperOption: {
-        slidesPerView: 2,
+        slidesPerView: 1,
         spaceBetween: 30,
         autoplay: {
           delay: 3000,
