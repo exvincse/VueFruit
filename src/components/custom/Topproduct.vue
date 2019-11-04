@@ -50,7 +50,7 @@
           </swiper>
         </div> -->
 
-        <div class="d-lg-none d-flex">
+        <div class="d-flex">
           <swiper :options="RWDswiperOption">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
