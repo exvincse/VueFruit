@@ -2,8 +2,8 @@
   <div>
     <section class="my-3">
       <div class="container">
-        <div class="d-lg-block d-none">
-          <swiper :options="swiperOption" v-if="total_sort.length">
+        <div class="d-lg-flex d-none">
+          <swiper :options="swiperOption">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
               <div class="card mb-5">
@@ -50,8 +50,8 @@
           </swiper>
         </div>
 
-        <div class="d-lg-none d-block">
-          <swiper :options="RWDswiperOption" v-if="total_sort.length">
+        <div class="d-lg-none d-flex">
+          <swiper :options="RWDswiperOption">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width:350px;margin-right:30px;">
                   <div class="card mb-5">
@@ -88,7 +88,7 @@
                     </button>
                   </div>
             </swiper-slide>
-            <div class="RWDswiper-pagination" slot="pagination"></div>
+            <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
       </div>
@@ -124,7 +124,7 @@ export default {
         },
         speed: 1000,
         pagination: {
-          el: '.RWDswiper-pagination',
+          el: '.swiper-pagination',
           clickable: true
         }
       },
