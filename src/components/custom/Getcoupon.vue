@@ -152,7 +152,7 @@ export default {
         this.qcount += 1
         let time = setTimeout(() => {
           this.modalshow = true
-          if (this.id <= 2) {
+          if (this.id < 2) {
             $('#exampleModal').modal('show')
           }
           this.nextq()
