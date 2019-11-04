@@ -2,7 +2,7 @@
   <div>
     <section class="my-3">
       <div class="container">
-        <div class="d-lg-flex d-none">
+        <!-- <div class="d-lg-flex d-none">
           <swiper :options="swiperOption">
             <swiper-slide v-for="item in total_sort"
                    :key="item.product.id" style="width: 350px; margin-right: 30px;">
@@ -48,7 +48,7 @@
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
-        </div>
+        </div> -->
 
         <div class="d-lg-none d-flex">
           <swiper :options="RWDswiperOption">
