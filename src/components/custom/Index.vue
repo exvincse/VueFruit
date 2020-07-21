@@ -176,8 +176,8 @@ export default {
   methods: {
     // 呼叫Vuex modules Mproduct/getProducts方法，並使用promise等待當前ajax結束後才取得資料
     productpic () {
-      this.$store.dispatch('Mproduct/getProducts').then(() => {
-        this.data = this.$store.state.Mproduct.product
+      this.$store.dispatch('productModules/getProducts').then(() => {
+        this.data = this.$store.state.productModules.product
       })
     },
     // 原生scroll事件向下滑顯示動畫效果

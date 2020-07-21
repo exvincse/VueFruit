@@ -93,8 +93,8 @@ export default {
   methods: {
     // 呼叫Vuex modules getProducts方法，並使用promise等待當前ajax結束後才取得資料
     getProducts () {
-      this.$store.dispatch('Mproduct/getProducts').then(() => {
-        this.products = this.$store.state.Mproduct.product.slice()
+      this.$store.dispatch('productModules/getProducts').then(() => {
+        this.products = this.$store.state.productModules.product.slice()
       })
     },
     // 開啟新增修改modal

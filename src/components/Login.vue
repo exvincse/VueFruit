@@ -57,18 +57,14 @@ export default {
   methods: {
     // 驗證登入
     signin () {
-      this.$validator.validate().then((valid) => {
+      this.$validator.validate().then(async (valid) =>{
         if (valid) {
-          this.$store.dispatch('updateLoading', true)
-          const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
-          this.$http.post(api, this.user).then((response) => {
-            if (response.data.success) {
+          let res = await this.$store.dispatch('dashboardModules/signIn', this.user);
+            if (res.success) {
               this.$router.push('/admin/products')
             } else {
-              this.message = response.data.message
+              this.message = res.message
             }
-            this.$store.dispatch('updateLoading', false)
-          })
         }
       })
     }

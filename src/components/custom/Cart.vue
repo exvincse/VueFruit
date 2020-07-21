@@ -247,13 +247,13 @@ export default {
   },
   computed: {
     // 取得vuex計算資料
-    ...mapGetters('Mcart', ['data', 'isdisabled'])
+    ...mapGetters('cartModules', ['data', 'isdisabled'])
   },
   methods: {
     // 呼叫Vuex modules Mcart/getCart方法，並使用promise等待當前ajax結束後才取得資料
     getCart () {
-      this.$store.dispatch('Mcart/getCart').then(() => {
-        this.hide = this.$store.state.Mcart.hide
+      this.$store.dispatch('cartModules/getCart').then(() => {
+        this.hide = this.$store.state.cartModules.hide
       })
     },
     // 計時3秒
@@ -269,7 +269,7 @@ export default {
     },
     // 呼叫Vuex modules Mcart/removeCart方法，並使用promise等待當前ajax結束後才取得資料
     removeCart (id) {
-      this.$store.dispatch('Mcart/removeCart', id).then(() => {
+      this.$store.dispatch('cartModules/removeCart', id).then(() => {
         this.getCart()
       })
     },

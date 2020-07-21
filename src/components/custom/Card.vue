@@ -133,7 +133,7 @@ export default {
   },
   // 接收vuex計算的資料
   computed: {
-    ...mapGetters('Mcart', ['loading'])
+    ...mapGetters('cartModules', ['loading'])
   },
   methods: {
     // 呼叫時render分類
@@ -163,7 +163,7 @@ export default {
     },
     // 新增至購物車
     addtoCart (id, qty = 1) {
-      this.$store.dispatch('Mcart/addtocart', { id, qty })
+      this.$store.dispatch('cartModules/addCart', { id, qty })
     },
     // 接收Pages子元件資料，來切換當頁資料
     getPageData (PageData) {

@@ -143,8 +143,8 @@ export default {
   methods: {
     // 呼叫Vuex modules/getProducts方法，並使用promise等待當前ajax結束後才取得資料
     getProducts () {
-      this.$store.dispatch('Mproduct/getProducts').then(() => {
-        this.product = this.$store.state.Mproduct.product
+      this.$store.dispatch('productModules/getProducts').then(() => {
+        this.product = this.$store.state.productModules.product
       })
     },
     // 取得當前時間

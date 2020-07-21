@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     // 接收vuex計算的資料，product icon loading
-    ...mapGetters('Mcart', ['loading'])
+    ...mapGetters('cartModules', ['loading'])
   },
   created () {
     // ajax獲取資料，並獲取route params
@@ -107,7 +107,7 @@ export default {
     },
     // 加入購物車
     addCart (id, qty = 1) {
-      this.$store.dispatch('Mcart/addtocart', { id, qty })
+      this.$store.dispatch('cartModules/addCart', { id, qty })
     }
   }
 }

@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Mproduct from './product'
-import Mcart from './cart'
+import productModules from './product'
+import cartModules from './cart'
+import dashboardModules from './dashboard'
 import router from '../router'
 Vue.use(Vuex)
 
@@ -15,30 +16,35 @@ export default new Vuex.Store({
   },
   // 接收外部呼叫vuex方法
   actions: {
-    updateLoading (context, payload) {
-      context.commit('LOADING', payload)
+    updateLoading ({ commit }, params) {
+      commit('LOADING', params)
     },
-    IsDisabled (context, payload) {
-      context.commit('ISDISABLE', payload)
+    IsDisabled ({ commit }, params) {
+      commit('setDisable', params)
     },
-    updateMessage (context, { message, status }) {
+    updateMessage ({ commit, dispatch }, params) {
       const timestamp = Math.floor(new Date() / 1000)
-      context.commit('MESSAGE', { message, status, timestamp })
-      context.dispatch('removeMessageWithTiming', timestamp)
+      let _params = {
+        message: params.message,
+        status: params.status,
+        timestamp
+      }
+      commit('setMessage', _params);
+      dispatch('removeMessageWithTiming', timestamp)
     },
-    removeMessage (context, num) {
-      context.commit('REMOVE', num)
+    removeMessage ({ commit }, params) {
+      commit('setRemoveMessage', params)
     },
-    removeMessageWithTiming (context, timestamp) {
+    removeMessageWithTiming ({ commit }, params) {
       setTimeout(() => {
-        context.commit('TIMEREMOVE', timestamp)
+        commit('setRemoveTimer', params)
       }, 5000)
     },
-    view (context, id) {
+    view ({ commit }, params) {
       router.push({
         path: '/newmsg/article',
         query: {
-          id
+          params
         }
       })
     }
@@ -48,24 +54,24 @@ export default new Vuex.Store({
     LOADING (state, payload) {
       state.isLoading = payload
     },
-    ISDISABLE (state, payload) {
+    setDisable (state, payload) {
       state.isdisabled = payload
     },
-    MESSAGE (state, { message, status, timestamp }) {
+    setMessage (state, payload) {
       state.message.push({
-        message,
-        status,
-        timestamp
+        message:payload.message,
+        status:payload.status,
+        timestamp:payload.timestamp
       })
     },
-    TIMEREMOVE (state, timestamp) {
+    setRemoveTimer (state, timestamp) {
       state.message.forEach((item, i) => {
         if (item.timestamp === timestamp) {
           state.message.splice(i, 1)
         }
       })
     },
-    REMOVE (state, num) {
+    setRemoveMessage (state, num) {
       state.message.splice(num, 1)
     }
   },
@@ -80,7 +86,8 @@ export default new Vuex.Store({
   },
   // import模組
   modules: {
-    Mproduct,
-    Mcart
+    productModules,
+    cartModules,
+    dashboardModules
   }
 })

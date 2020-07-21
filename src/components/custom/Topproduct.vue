@@ -146,7 +146,7 @@ export default {
   },
   computed: {
     // 取得vuex計算資料
-    ...mapGetters('Mcart', ['loading'])
+    ...mapGetters('cartModules', ['loading'])
   },
   methods: {
     // 取得訂單資料
@@ -219,7 +219,7 @@ export default {
     },
     // 加入購物車
     addtoCart (id, qty = 1) {
-      this.$store.dispatch('Mcart/addtocart', { id, qty })
+      this.$store.dispatch('cartModules/addCart', { id, qty })
     }
   }
 }

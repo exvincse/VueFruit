@@ -32,7 +32,7 @@
                     v-for="(name,number) in item.chenckq" :key="number">
                     <input type="radio" class="custom-control-input"
                       ref="radio"
-                      :id="name" :value="name" v-model="check" :checked='checkeed'>
+                      :id="name" :value="name" v-model="check">
                     <label class="custom-control-label cursor"
                       :for="name">{{name}}</label>
                   </div>
@@ -94,7 +94,6 @@ export default {
       chance: 3,
       qcount: 0,
       star: false,
-      checkeed: false,
       modalshow: false
     }
   },

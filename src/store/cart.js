@@ -1,4 +1,5 @@
-import axios from 'axios'
+import Url from "../apiUrl/index";
+import Api from "../ajaxHandler/index";
 export default {
   namespaced: true,
   state: {
@@ -6,96 +7,85 @@ export default {
       carts: []
     },
     timeSender: null,
-    loading: '',
-    isdisable: '',
+    loading: "",
+    isDisable: "",
     hide: true
   },
   // 接收外部呼叫vuex方法
   actions: {
-    getCart (context) {
-      context.commit('HIDE', true)
-      context.commit('LOADING', true, { root: true })
-      return new Promise((resolve, reject) => {
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-        axios.get(api).then((response) => {
-          if (response.data.success) {
-            if (response.data.data.carts.length === 0) {
-              context.commit('HIDE', false)
-            }
-            context.commit('GETCART', response.data.data)
-            context.commit('LOADING', false, { root: true })
-            resolve()
-          } else {
-            reject(new Error('error!'))
-          }
-        })
-      })
+    async getCart({ commit }, params) {
+      commit("HIDE", true);
+      let res = await Api.get(Url.getCartList);
+      commit("HIDE", false);
+      commit("setCartData", res.data.data);
     },
-    removeCart (context, id) {
-      context.commit('LOADING', true, { root: true })
-      context.commit('DISABLE', id)
-      return new Promise((resolve) => {
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
-        axios.delete(api).then((response) => {
-          if (response.data.success) {
-            let message = response.data.message + `商品`
-            context.dispatch('updateMessage', { message, status: 'danger' }, { root: true })
-            context.commit('DISABLE', id)
-            // context.dispatch('Mproduct/getProducts')
-            context.commit('LOADING', false, { root: true })
-            resolve()
-          }
-        })
-      })
-    },
-    addtocart (context, { id, qty }) {
-      context.commit('LOADINGITEM', id)
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
-      let data = {
-        data: {
-          product_id: id,
-          qty
-        }
+    async removeCart({ commit, dispatch }, params) {
+      commit("setCartDisable", params);
+      let res = await Api.delete(Url.deleteCart + `/${params}`);
+      if (res.data.success) {
+        let message = res.data.message + `商品`;
+        dispatch(
+          "updateMessage",
+          { message, status: "danger" },
+          { root: true }
+        );
+        commit("setCartDisable", params);
       }
-      axios.post(api, data).then((response) => {
-        if (response.data.success) {
-          let message = response.data.message
-          context.dispatch('updateMessage', { message, status: 'success' }, { root: true })
-        } else {
-          let message = response.data.message
-          context.dispatch('updateMessage', { message, status: 'danger' }, { root: true })
+    },
+    async addCart({ commit, dispatch }, params) {
+      commit("setItemLoading", params.id);
+      let _params = {
+        data: {
+          product_id: params.id,
+          qty: params.qty
         }
-        context.dispatch('getCart')
-        context.commit('LOADINGITEM', '')
-      })
+      };
+      let res = await Api.post(Url.addCart, _params);
+      if (res.data.success) {
+        let message = res.data.message;
+        dispatch(
+          "updateMessage",
+          { message, status: "success" },
+          { root: true }
+        );
+      } else {
+        let message = res.data.message;
+        dispatch(
+          "updateMessage",
+          { message, status: "danger" },
+          { root: true }
+        );
+      }
+      dispatch("getCart");
+      commit("setItemLoading", "");
     }
   },
   // 接收actions資料並賦值state，或做計算
   mutations: {
-    GETCART (state, payload) {
-      payload.carts = payload.carts.reverse()
-      state.data = payload
+    setCartData(state, payload) {
+      payload.carts = payload.carts.reverse();
+      state.data = payload;
     },
-    LOADINGITEM (state, payload) {
-      state.loading = payload
+    setItemLoading(state, payload) {
+      state.loading = payload;
     },
-    DISABLE (state, payload) {
-      state.isdisable = payload
+    setCartDisable(state, payload) {
+      state.isDisable = payload;
     },
-    HIDE (state, payload) {
-      state.hide = payload
+    HIDE(state, payload) {
+      state.hide = payload;
     }
   },
   // 回傳state資料給呼叫的元件component
   getters: {
-    data (state) {
-      return state.data
+    data(state) {
+      return state.data;
     },
-    loading (state) {
-      return state.loading
+    loading(state) {
+      return state.loading;
     },
-    isdisabled (state) {
-      return state.isdisable
+    isdisabled(state) {
+      return state.isDisable;
     }
   }
-}
+};

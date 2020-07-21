@@ -87,8 +87,8 @@ export default {
     // 提交並驗證資料
     submitPage () {
       this.$store.dispatch('updateLoading', true)
-      this.$store.dispatch('Mcart/getCart').then(() => {
-        if (this.$store.state.Mcart.hide === true) {
+      this.$store.dispatch('cartModules/getCart').then(() => {
+        if (this.$store.state.cartModules.hide === true) {
           const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
           this.$validator.validate().then((valid) => {
             if (valid) {

@@ -66,7 +66,7 @@ export default {
     // 監聽路由並呼叫vuex Mcart/getCart方法
     '$route' () {
       this.CartShow()
-      this.$store.dispatch('Mcart/getCart')
+      this.$store.dispatch('cartModules/getCart')
     }
   },
   mounted () {

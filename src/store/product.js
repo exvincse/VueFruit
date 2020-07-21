@@ -1,4 +1,5 @@
-import axios from 'axios'
+import Url from "../apiUrl/index";
+import Api from "../ajaxHandler/index";
 
 export default {
   namespaced: true,
@@ -7,25 +8,17 @@ export default {
   },
   // 接收外部呼叫vuex方法
   actions: {
-    getProducts (context) {
-      context.commit('LOADING', true, { root: true })
-      return new Promise((resolve) => {
-        const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
-        axios.get(api).then((response) => {
-          if (response.data.success) {
-            let filter = Object.values(response.data.products).map(item => item)
-            context.commit('PRODUCT', filter)
-            context.commit('LOADING', false, { root: true })
-            resolve()
-          }
-        })
-      })
+    async getProducts({ commit }, params) {
+      let res = await Api.get(Url.getAllProductNoKet);
+      if (res.data.success) {
+        commit("setProductData", res.data.products);
+      }
     }
   },
   // 接收actions資料並賦值state，或做計算
   mutations: {
-    PRODUCT (state, payload) {
-      state.product = payload
+    setProductData(state, payload) {
+      state.product = payload;
     }
   }
-}
+};
