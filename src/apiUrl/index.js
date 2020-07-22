@@ -2,9 +2,9 @@ let api = {
   // 後台登入
   signIn: `${process.env.VUE_APP_APIPATH}/admin/signin`,
   // 後台登出
-  logout: `https://vue-course-api.hexschool.io/logout`,
+  logout: `${process.env.VUE_APP_APIPATH}/logout`,
   // 檢查用戶是否仍持續登入
-  checkLogin: `https://vue-course-api.hexschool.io/api/user/check`,
+  checkLogin: `${process.env.VUE_APP_APIPATH}/api/user/check`,
 
   // 商品建立
   createProduct: `${process.env.VUE_APP_APIPATH}/api/${
@@ -25,16 +25,15 @@ let api = {
   // 修改產品
   modifyProduct: `${process.env.VUE_APP_APIPATH}/api/${
     process.env.VUE_APP_CUSTOMPATH
-  }/admin/product/:id`,
+  }/admin/product`,
   // 刪除產品
-
   deleteProduct: `${process.env.VUE_APP_APIPATH}/api/${
     process.env.VUE_APP_CUSTOMPATH
-  }/admin/product/:product_id`,
+  }/admin/product`,
   // 取得訂單列表
   getOrderList: `${process.env.VUE_APP_APIPATH}/api/${
     process.env.VUE_APP_CUSTOMPATH
-  }/admin/orders?page=:page`,
+  }/admin/orders?page=`,
   // 修改訂單
   modifyOrder: `${process.env.VUE_APP_APIPATH}/api/${
     process.env.VUE_APP_CUSTOMPATH
