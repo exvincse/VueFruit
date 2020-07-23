@@ -22,6 +22,10 @@ let api = {
   getAllProductNoKet: `${process.env.VUE_APP_APIPATH}/api/${
     process.env.VUE_APP_CUSTOMPATH
   }/products/all`,
+  // 取得單一商品
+  getSingleProduct: `${process.env.VUE_APP_APIPATH}/api/${
+    process.env.VUE_APP_CUSTOMPATH
+  }/product`,
   // 修改產品
   modifyProduct: `${process.env.VUE_APP_APIPATH}/api/${
     process.env.VUE_APP_CUSTOMPATH
@@ -30,14 +34,18 @@ let api = {
   deleteProduct: `${process.env.VUE_APP_APIPATH}/api/${
     process.env.VUE_APP_CUSTOMPATH
   }/admin/product`,
-  // 取得訂單列表
+  // 取得訂單列表(須驗證)
   getOrderList: `${process.env.VUE_APP_APIPATH}/api/${
     process.env.VUE_APP_CUSTOMPATH
   }/admin/orders?page=`,
-  // 修改訂單
-  modifyOrder: `${process.env.VUE_APP_APIPATH}/api/${
+  // 取得訂單列表(不須驗證)
+  getOrderListNokey: `${process.env.VUE_APP_APIPATH}/api/${
     process.env.VUE_APP_CUSTOMPATH
-  }/admin/order/:id`,
+  }/orders?page=`,
+  // 取得單筆訂單
+  getSingleOrder: `${process.env.VUE_APP_APIPATH}/api/${
+    process.env.VUE_APP_CUSTOMPATH
+  }/order`,
 
   // 新增優惠券
   addCoupon: `${process.env.VUE_APP_APIPATH}/api/${

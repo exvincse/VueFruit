@@ -16,7 +16,9 @@ export default {
     async getCart({ commit }, params) {
       commit("HIDE", true);
       let res = await Api.get(Url.getCartList);
-      commit("HIDE", false);
+      if (!res.data.success) {
+        commit("HIDE", false);
+      }
       commit("setCartData", res.data.data);
     },
     async removeCart({ commit, dispatch }, params) {
