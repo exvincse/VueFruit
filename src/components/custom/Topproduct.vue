@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
     props: ['topdata'],
     data() {
@@ -127,8 +127,9 @@ export default {
         }
     },
     computed: {
-        // 取得vuex計算資料
-        ...mapGetters('cartModules', ['loading'])
+        ...mapState({
+            loading: state => state.cartModules.loading
+        })
     },
     methods: {
         // ajax獲取資料

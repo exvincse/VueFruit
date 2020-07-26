@@ -2,7 +2,7 @@ let api = {
   // 後台登入
   signIn: `${process.env.VUE_APP_APIPATH}/admin/signin`,
   // 後台登出
-  logout: `${process.env.VUE_APP_APIPATH}/logout`,
+  signOut: `${process.env.VUE_APP_APIPATH}/logout`,
   // 檢查用戶是否仍持續登入
   checkLogin: `${process.env.VUE_APP_APIPATH}/api/user/check`,
 

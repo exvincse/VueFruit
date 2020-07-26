@@ -39,6 +39,16 @@ let ajax = {
       .catch(error => {
         return error;
       });
+  },
+  all: function(url, params) {
+    return axios
+      .all(url)
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return error;
+      });
   }
 };
 export default ajax;

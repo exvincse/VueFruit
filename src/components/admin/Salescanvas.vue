@@ -162,20 +162,16 @@ export default {
                     let api = this.$http.get(totaldata)
                     totalapi.push(api)
                 }
-                this.$http.all(totalapi).then(
-                    this.$http.spread((...res) => {
-                        let mapdata = res.map(item => item.data)
-                        mapdata.forEach((item) => {
-                            let list = item.orders
-                            list.forEach((item) => {
-                                item.create_at = Number(item.create_at * 1000)
-                                this.orders.push(item)
-                            })
-                        })
-                        this.checkdate(true)
-                        this.$store.dispatch('updateLoading', false)
+                let allRes = await axios.all(totalapi)
+                let mapdata = allRes.map(item => item.data)
+                mapdata.forEach((item) => {
+                    let list = item.orders
+                    list.forEach((item) => {
+                        item.create_at = Number(item.create_at * 1000)
+                        this.orders.push(item)
                     })
-                )
+                })
+                this.checkdate(true)
             }
         },
         // 年月份改變時，篩選符合的資料

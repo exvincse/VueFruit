@@ -22,7 +22,7 @@ export default {
     },
     // 取得單一商品
     async getSingleProduct({ commit }, params) {
-      let res = await Api.get(Url.getSingleProduct, params);
+      let res = await Api.get(Url.getSingleProduct + `/${params}`);
       return res.data;
     },
     // 取得訂單列表

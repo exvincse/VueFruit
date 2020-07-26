@@ -56,6 +56,7 @@
 import NavDate from '@/components/admin/Navdate'
 import NavSelect from '@/components/admin/Navselect'
 import pages from '@/components/common/Pages'
+import axios from '@/ajaxHandler/index';
 export default {
     data() {
         return {
@@ -89,52 +90,36 @@ export default {
                     let api = this.$http.get(totaldata)
                     totalapi.push(api)
                 }
-                this.$http.all(totalapi).then(
-                    this.$http.spread((...res) => {
-                        let mapdata = res.map(item => item.data)
-                        mapdata.forEach((item) => {
-                            let list = item.orders
-                            list.forEach((item) => {
-                                item.create_at = Number(item.create_at * 1000)
-                                this.orders.push(item)
-                            })
-                        })
-                        this.ary = this.orders
-                        this.$store.dispatch('updateLoading', false)
+                let allRes = await axios.all(totalapi)
+                let mapdata = allRes.map(item => item.data)
+                mapdata.forEach((item) => {
+                    let list = item.orders
+                    list.forEach((item) => {
+                        item.create_at = Number(item.create_at * 1000)
+                        this.orders.push(item)
                     })
-                )
+                })
+                this.ary = this.orders
             }
         },
         // 接收NavDate子元件資料，並篩選當前年月資料
         changeMonth(year, month) {
-            let CopyAry = Array.prototype.slice.call(this.orders)
-            let DateAry = CopyAry.map((item) => {
-                let date = new Date(item.create_at)
-                let year = date.getFullYear()
-                let month = date.getMonth() + 1
-                let day = date.getDate()
-                let gettime = year + '/' + month + '/' + day
-                item.create_at = gettime
-                return item
-            })
             if (year === '' && month === '') {
                 this.getOrderData()
                 return
             }
-
-            let FilterAry = DateAry.filter((item) => {
+            this.ary = this.orders.map((item) => {
+                let date = new Date(item.create_at)
+                item.create_at = date.getFullYear() + '/' + date.getMonth() + 1 + '/' + date.getDate()
+                return item
+            }).filter((item) => {
                 let time = item.create_at.split('/')
                 if (month) {
-                    if (Number(time[0]) === year && Number(time[1]) === month) {
-                        return item
-                    }
+                    return Number(time[0]) === year && Number(time[1]) === month
                 } else {
-                    if (Number(time[0]) === year) {
-                        return item
-                    }
+                    return Number(time[0]) === year
                 }
             })
-            this.ary = FilterAry
         },
         // 接收NavSelect子元件資料，並以輸入關鍵字來篩選當前資料
         select(selectname) {
@@ -142,13 +127,12 @@ export default {
             if (selectname === '') {
                 this.ary = this.orders
             } else {
-                let FilterAry = this.orders.filter((item, index, ary) => {
+                this.ary= this.orders.filter((item, index, ary) => {
                     //  全部符合
                     //  let toAry = item.user.email.split(',');
                     //  console.log(toAry.indexOf(this.selectname));
                     return item.user.email.includes(selectname)
                 })
-                this.ary = FilterAry
             }
         },
         // 接收Pages子元件資料，來切換當頁資料

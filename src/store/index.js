@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
 import productModules from "./product";
 import cartModules from "./cart";
 import dashboardModules from "./dashboard";
@@ -12,16 +11,12 @@ export default new Vuex.Store({
   strict: true,
   state: {
     isLoading: false,
-    isdisabled: false,
     message: []
   },
   // 接收外部呼叫vuex方法
   actions: {
     updateLoading({ commit }, params) {
-      commit("LOADING", params);
-    },
-    IsDisabled({ commit }, params) {
-      commit("setDisable", params);
+      commit("setUpdateLoading", params);
     },
     updateMessage({ commit, dispatch }, params) {
       const timestamp = Math.floor(new Date() / 1000);
@@ -52,11 +47,8 @@ export default new Vuex.Store({
   },
   // 接收actions資料並賦值state，或做計算
   mutations: {
-    LOADING(state, payload) {
+    setUpdateLoading(state, payload) {
       state.isLoading = payload;
-    },
-    setDisable(state, payload) {
-      state.isdisabled = payload;
     },
     setMessage(state, payload) {
       state.message.push({
@@ -74,15 +66,6 @@ export default new Vuex.Store({
     },
     setRemoveMessage(state, num) {
       state.message.splice(num, 1);
-    }
-  },
-  // 回傳state資料給呼叫的原件computed
-  getters: {
-    messages(state) {
-      return state.message;
-    },
-    loading(state) {
-      return state.isLoading;
     }
   },
   // import模組

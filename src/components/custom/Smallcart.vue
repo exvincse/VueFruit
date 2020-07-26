@@ -4,19 +4,19 @@
             <a class="btn btn-cart btn-sm" href="#" @click.prevent="show=!show">
                 <div class="cart">
                     <i class="fas fa-shopping-cart fa-2x text-white"></i>
-                    <span class="number">{{data.carts.length}}</span>
+                    <span class="number">{{cartData.carts.length}}</span>
                 </div>
             </a>
 
             <div class="dropdown-menu mt-2 d-inline-block" v-if="show">
                 <div class="px-4 py-3 h-100">
-                    <div class="h-100 d-flex flex-column justify-content-between" v-if="data.carts.length">
+                    <div class="h-100 d-flex flex-column justify-content-between" v-if="cartData.carts.length">
                         <div>
                             <h5>已選擇商品</h5>
                             <div class="table-reponsive">
                                 <table class="table">
                                     <tbody>
-                                        <tr v-for="item in data.carts" :key="item.id">
+                                        <tr v-for="item in cartData.carts" :key="item.id">
                                             <td>
                                                 <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#del" @click="removeCart(item.id)" :disabled="isdisabled === item.id">
                                                     <i class="far fa-trash-alt"></i>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
     data() {
         return {
@@ -56,8 +56,10 @@ export default {
         }
     },
     computed: {
-        // 取得vuex計算資料
-        ...mapGetters('cartModules', ['data', 'isdisabled'])
+        ...mapState({
+            cartData: state => state.cartModules.data,
+            isdisabled: state => state.cartModules.isdisabled,
+        })
     },
     created() {
         // ajax獲取資料

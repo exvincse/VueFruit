@@ -97,7 +97,7 @@
 <script>
 import pages from '@/components/common/Pages'
 import $ from 'jquery'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   components: {
     pages
@@ -133,7 +133,9 @@ export default {
   },
   // 接收vuex計算的資料
   computed: {
-    ...mapGetters('cartModules', ['loading'])
+    ...mapState({
+      loading: state => state.cartModules.loading
+    })
   },
   methods: {
     // 呼叫時render分類

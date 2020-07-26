@@ -34,7 +34,7 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-outline-primary btn-sm mr-2" @click="openCouponModal(false,item)">編輯</button>
-                                    <button class="btn btn-outline-danger btn-sm" @click="DelCouponModal(item)">刪除</button>
+                                    <button class="btn btn-outline-danger btn-sm" @click="delCouponModal(item)">刪除</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -49,9 +49,9 @@
                     請建立優惠卷
                 </div>
             </div>
-            <AddModal :tempCoupon="tempCoupon" @updateCoupons="updateCoupons"></AddModal>
+            <add-edit-popup :tempCoupon="tempCoupon" @updateCoupons="updateCoupons"></add-edit-popup>
 
-            <DelModal :tempCoupon="tempCoupon" @DeleteData="DeleteData"></DelModal>
+            <del-popup :item="tempCoupon" @reloadList="reloadList"></del-popup>
         </div>
 
     </div>
@@ -62,15 +62,16 @@ import $ from 'jquery'
 import NavDate from '@/components/admin/Navdate'
 import NavSelect from '@/components/admin/Navselect'
 import pages from '@/components/common/Pages'
-import AddModal from '@/components/admin/Coupons/method/AddEdit'
-import DelModal from '@/components/admin/Coupons/method/Delete'
+import addEditPopup from '@/components/admin/Coupons/method/addEditPopup'
+import delPopup from '@/components/admin/delPopup'
+import axios from '@/ajaxHandler/index';
 export default {
     components: {
         NavDate,
         NavSelect,
         pages,
-        AddModal,
-        DelModal
+        addEditPopup,
+        delPopup
     },
     data() {
         return {
@@ -84,11 +85,11 @@ export default {
     },
     created() {
         // created時呼叫ajax把data資料準備好
-        this.getcoupons()
+        this.getCoupons()
     },
     methods: {
         // ajax獲取資料
-        async getcoupons() {
+        async getCoupons() {
             this.getCoupon = []
             let res = await this.$store.dispatch('dashboardModules/getCouponList', 1);
             if (res.success) {
@@ -99,19 +100,16 @@ export default {
                     let get = this.$http.get(api)
                     totalapi.push(get)
                 }
-                this.$http.all(totalapi).then(
-                    this.$http.spread((...res) => {
-                        let response = Object.values(res).map(item => item.data.coupons)
-                        if (response.length === 1) {
-                            this.getCoupon = response[0]
-                        } else {
-                            for (let i = 1; i < response.length; i++) {
-                                this.getCoupon = response[0].concat(response[i])
-                            }
-                        }
-                        this.ary = this.getCoupon
-                    })
-                )
+                let allRes = await axios.all(totalapi);
+                let response = allRes.map(item => item.data.coupons)
+                if (response.length === 1) {
+                    this.getCoupon = response[0]
+                } else {
+                    for (let i = 1; i < response.length; i++) {
+                        this.getCoupon = response[0].concat(response[i])
+                    }
+                }
+                this.ary = this.getCoupon
             }
         },
         // 開啟新增修改modal
@@ -143,7 +141,7 @@ export default {
                         res = await this.$store.dispatch('dashboardModules/modifyCoupon', params)
                     }
                     $('#couponModal').modal('hide')
-                    this.getcoupons()
+                    this.getCoupons()
                     let message = res.message
                     if (res.success) {
                         this.$store.dispatch('updateMessage', { message, status: 'success' })
@@ -154,50 +152,29 @@ export default {
             })
         },
         // 開啟刪除modal
-        DelCouponModal(item) {
+        delCouponModal(item) {
             this.tempCoupon = Object.assign({}, item)
-            $('#delCouponModal').modal('show')
-        },
-        // 接收刪除modal子元件資料並發送ajax
-        async DeleteData(id) {
-            let res = await this.$store.dispatch('dashboardModules/deleteCoupon', id);
-            $('#delCouponModal').modal('hide')
-            this.getcoupons()
-            let message = res.message
-            this.$store.dispatch('updateMessage', { message, status: 'danger' })
+            $('#delModal').modal('show')
         },
         // 接收NavDate子元件資料，並篩選當前年月資料
         changeMonth(year, month) {
-            let CopyAry = Array.prototype.slice.call(this.getCoupon)
-            let DateAry = CopyAry.map((item) => {
-                let date = new Date(item.due_date)
-                let year = date.getFullYear()
-                let month = date.getMonth() + 1
-                let day = date.getDate()
-                let gettime = year + '/' + month + '/' + day
-                item.due_date = gettime
-                return item
-            })
             if (year === '' && month === '') {
-                this.getcoupons()
+                this.getCoupons()
                 return
             }
 
-            let FilterAry = DateAry.filter((item) => {
+            this.ary = this.getCoupon.map((item) => {
+                let date = new Date(item.due_date)
+                item.due_date = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate()
+                return item
+            }).filter((item) => {
                 let time = item.due_date.split('/')
                 //  月份存在時，必須配合年份篩選
                 if (month) {
-                    if (Number(time[0]) === year && Number(time[1]) === month) {
-                        return item
-                    }
-                    //  不存在則以年分
-                } else {
-                    if (Number(time[0]) === year) {
-                        return item
-                    }
+                    return Number(time[0]) === year && Number(time[1]) === month
                 }
+                return Number(time[0]) === year
             })
-            this.ary = FilterAry
         },
         // 接收NavSelect子元件資料，並以輸入關鍵字來篩選當前資料
         select(selectname) {
@@ -205,18 +182,20 @@ export default {
             if (selectname === '') {
                 this.ary = this.getCoupon
             } else {
-                let filterary = this.getCoupon.filter((item, index, ary) => {
+                this.ary = this.getCoupon.filter((item) => {
                     //  全部符合
                     //  let toAry = item.title.split(',');
                     //  console.log(toAry.indexOf(selectname));
                     return item.title.indexOf(selectname) !== -1
                 })
-                this.ary = filterary
             }
         },
         // 接收Pages子元件資料，來切換當頁資料
         getPageData(getdata) {
             this.pagedata = getdata
+        },
+        reloadList() {
+            this.getCoupons();
         }
     }
 }

@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import $ from 'jquery'
 export default {
     data() {
@@ -62,8 +62,9 @@ export default {
         }
     },
     computed: {
-        // 接收vuex計算的資料，product icon loading
-        ...mapGetters('cartModules', ['loading'])
+        ...mapState({
+            loading: state => state.cartModules.loading
+        })
     },
     created() {
         // ajax獲取資料，並獲取route params

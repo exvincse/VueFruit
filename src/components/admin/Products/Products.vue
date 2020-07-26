@@ -44,23 +44,23 @@
         </div>
 
         <div v-else class="h1 text-center">請建立商品</div>
-        <AddEdit :tempproduct="tempproduct" :status="status" @updateproduct="updateproduct"></AddEdit>
+        <add-edit-popup :tempproduct="tempproduct" :status="status" @updateproduct="updateproduct"></add-edit-popup>
 
-        <Delete :tempproduct="tempproduct" @delData="delData"></Delete>
+        <del-popup :item="tempproduct" @reloadList="reloadList"></del-popup>
     </div>
 </template>
 
 <script>
 import $ from 'jquery'
 import pages from '@/components/common/Pages'
-import Delete from '@/components/admin/Products/method/Delete'
-import AddEdit from '@/components/admin/Products/method/AddEdit'
+import delPopup from '@/components/admin/delPopup'
+import addEditPopup from '@/components/admin/Products/method/addEditPopup'
 
 export default {
     components: {
         pages,
-        Delete,
-        AddEdit
+        delPopup,
+        addEditPopup
     },
     data() {
         return {
@@ -121,19 +121,14 @@ export default {
         // 開啟刪除modal
         delModal(item) {
             this.tempproduct = Object.assign({}, item)
-            $('#delProductModal').modal('show')
-        },
-        // 接收刪除modal子元件資料並發送ajax
-        async delData() {
-            let res = await this.$store.dispatch('dashboardModules/deleteProduct', this.tempproduct.id);
-            $('#productModal').modal('hide')
-            this.getProducts()
-            let message = res.message
-            this.$store.dispatch('updateMessage', { message, status: 'danger' })
+            $('#delModal').modal('show')
         },
         // 接收Pages子元件資料，來切換當頁資料
         getPageData(get) {
             this.PageData = get
+        },
+        reloadList() {
+            this.getProducts();
         }
     }
 }

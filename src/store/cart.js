@@ -9,15 +9,15 @@ export default {
     timeSender: null,
     loading: "",
     isDisable: "",
-    hide: true
+    emptyCartDataTime: true
   },
   // 接收外部呼叫vuex方法
   actions: {
     async getCart({ commit }, params) {
-      commit("HIDE", true);
+      commit("setEmptyCartDataTime", true);
       let res = await Api.get(Url.getCartList);
       if (!res.data.success) {
-        commit("HIDE", false);
+        commit("setEmptyCartDataTime", false);
       }
       commit("setCartData", res.data.data);
     },
@@ -60,6 +60,9 @@ export default {
       }
       dispatch("getCart");
       commit("setItemLoading", "");
+    },
+    setEmptyCartDataTime({ commit, dispatch }, param) {
+      commit("setEmptyCartDataTime", param);
     }
   },
   // 接收actions資料並賦值state，或做計算
@@ -74,20 +77,8 @@ export default {
     setCartDisable(state, payload) {
       state.isDisable = payload;
     },
-    HIDE(state, payload) {
-      state.hide = payload;
-    }
-  },
-  // 回傳state資料給呼叫的元件component
-  getters: {
-    data(state) {
-      return state.data;
-    },
-    loading(state) {
-      return state.loading;
-    },
-    isdisabled(state) {
-      return state.isDisable;
+    setEmptyCartDataTime(state, payload) {
+      state.emptyCartDataTime = payload;
     }
   }
 };

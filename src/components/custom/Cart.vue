@@ -1,7 +1,7 @@
 <template>
     <div style="position: relative;">
         <div class="container mb-5">
-            <div v-if="hide">
+            <div v-if="emptyCartDataTime">
                 <section class="mt-3">
                     <div class="container mb-3">
                         <h1 class="text-center">結帳頁</h1>
@@ -48,7 +48,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-11">
                         <div class="row justify-content-center">
-                            <div class="col-lg-4 d-xl-block d-none" v-if="hide">
+                            <div class="col-lg-4 d-xl-block d-none" v-if="emptyCartDataTime">
                                 <div class="order-im p-4">
                                     <h5 class="title">商品資訊</h5>
                                     <div>
@@ -62,7 +62,7 @@
                                                     <th>單價</th>
                                                 </thead>
                                                 <tbody>
-                                                    <tr v-for="item in data.carts" :key="item.id">
+                                                    <tr v-for="item in cartData.carts" :key="item.id">
                                                         <td class="align-middle">
                                                             <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCart(item.id)" :disabled="isdisabled === item.id">
                                                                 <i class="far fa-trash-alt"></i>
@@ -81,10 +81,10 @@
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
-                                                        <td colspan="3" :class="{'discount':data.final_total !== data.total}" class="text-right">總計</td>
-                                                        <td :class="{'discount':data.final_total !== data.total}" class="text-right">{{ data.total }}</td>
+                                                        <td colspan="3" :class="{'discount':cartData.final_total !== cartData.total}" class="text-right">總計</td>
+                                                        <td :class="{'discount':cartData.final_total !== cartData.total}" class="text-right">{{ cartData.total }}</td>
                                                     </tr>
-                                                    <tr v-if="data.final_total !== data.total">
+                                                    <tr v-if="cartData.final_total !== cartData.total">
                                                         <td colspan="3" class="text-right text-success">折扣價</td>
                                                         <td class="text-right text-success">{{ data.final_total }}</td>
                                                     </tr>
@@ -121,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <div class="m-pos" v-if="hide">
+        <div class="m-pos" v-if="emptyCartDataTime">
             <div class="d-xl-none d-block m-order px-2 py-4" style="position:relative">
                 <div class="order-im">
                     <div>
@@ -135,7 +135,7 @@
                                     <th class="m-padding">單價</th>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="item in data.carts" :key="item.id">
+                                    <tr v-for="item in cartData.carts" :key="item.id">
                                         <td class="align-middle m-padding">
                                             <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCart(item.id)" :disabled="isdisabled === item.id">
                                                 <i class="far fa-trash-alt"></i>
@@ -154,12 +154,12 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="3" :class="{'discount':data.final_total !== data.total}" class="text-right m-padding">總計</td>
-                                        <td :class="{'discount':data.final_total !== data.total}" class="text-right m-padding">{{ data.total }}</td>
+                                        <td colspan="3" :class="{'discount':cartData.final_total !== cartData.total}" class="text-right m-padding">總計</td>
+                                        <td :class="{'discount':cartData.final_total !== cartData.total}" class="text-right m-padding">{{ cartData.total }}</td>
                                     </tr>
-                                    <tr v-if="data.final_total !== data.total">
+                                    <tr v-if="cartData.final_total !== cartData.total">
                                         <td colspan="3" class="text-right text-success">折扣價</td>
-                                        <td class="text-right text-success">{{ data.final_total }}</td>
+                                        <td class="text-right text-success">{{ cartData.final_total }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -184,7 +184,7 @@
 <script>
 import $ from 'jquery'
 import CostomForm from '@/components/custom/Checkpage'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
     components: {
         CostomForm
@@ -193,15 +193,17 @@ export default {
         return {
             coupons: '',
             timeSender: null,
-            hide: true,
             couponsath: false,
             time: 3
         }
     },
     watch: {
         // 監聽購物車都無商品時，3秒跳回商品頁
-        hide() {
-            this.timeout()
+        'cartData.carts'() {
+            if (this.cartData.carts.length === 0) {
+                this.$store.dispatch('cartModules/setEmptyCartDataTime', false);
+                this.timeout()
+            }
         }
     },
     created() {
@@ -213,15 +215,16 @@ export default {
         clearInterval(this.timeSender)
     },
     computed: {
-        // 取得vuex計算資料
-        ...mapGetters('cartModules', ['data', 'isdisabled'])
+        ...mapState({
+            cartData: state => state.cartModules.data,
+            isdisabled: state => state.cartModules.isDisable,
+            emptyCartDataTime: state => state.cartModules.emptyCartDataTime
+        })
     },
     methods: {
         // 呼叫Vuex modules Mcart/getCart方法，並使用promise等待當前ajax結束後才取得資料
         getCart() {
-            this.$store.dispatch('cartModules/getCart').then(() => {
-                this.hide = this.$store.state.cartModules.hide
-            })
+            this.$store.dispatch('cartModules/getCart')
         },
         // 計時3秒
         timeout() {
@@ -230,15 +233,15 @@ export default {
                 this.time -= 1
                 if (this.time === 0) {
                     this.$router.replace(`/products`)
+                    this.$store.dispatch('cartModules/setEmptyCartDataTime', true);
                 }
             }, 1000)
             this.timeSender = timeSender
         },
         // 呼叫Vuex modules Mcart/removeCart方法，並使用promise等待當前ajax結束後才取得資料
-        removeCart(id) {
-            this.$store.dispatch('cartModules/removeCart', id).then(() => {
-                this.getCart()
-            })
+        async removeCart(id) {
+            await this.$store.dispatch('cartModules/removeCart', id)
+            this.getCart()
         },
         // 使用優惠卷
         async UseCoupons() {
